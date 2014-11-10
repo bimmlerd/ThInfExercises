@@ -1,0 +1,512 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[swissgerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{enumerate}
+
+\usepackage{pgf} 
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata} %for FSM
+
+% Custom commands
+\DeclareMathOperator{\Kl}{Kl} %Klassen von Zuständen
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+% Shamelessly copied from http://tex.stackexchange.com/questions/43008/absolute-value-symbols
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} % nice |x|
+\DeclarePairedDelimiter\norm{\lVert}{\rVert} % nice ||x||
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+%\chead{\hmwkClass\ (\hmwkClassInstructor\): \hmwkTitle} % Top center head
+%\rhead{\firstxmark} % Top right header
+\rhead{}
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Seite\ \thepage\ von\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Pascal} % Load Pascal syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Pascal in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Pascal functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Pascal function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Pascal functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Pascal function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+        %
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .p), the second parameter is the caption
+\newcommand{\pascalscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.p}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+%\newcommand{\enterProblemHeader}[1]{
+%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%}
+
+% Header and footer for when a page split occurs between problem environments
+%\newcommand{\exitProblemHeader}[1]{
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{}\nobreak
+%}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Aufgabe \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+%\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+%\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+%\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+%\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Übungsaufgaben\ -\ Blatt\ 3} % Assignment title
+\newcommand{\hmwkDueDate}{10.\ Oktober\ 2014} % Due date
+\newcommand{\hmwkClass}{Theoretische Infomatik} % Course/class
+\newcommand{\hmwkClassInstructor}{Prof. Hromkovič} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Kevin Klein, Vincent von Rotz und David Bimmler} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Abgabe\ bis\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor}
+\vspace{3in}
+}}
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\addtocounter{homeworkProblemCounter}{6}
+\newpage
+%\tableofcontents
+%\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\begin{enumerate}[(a)]
+\item Es ist bekannt, dass $(\abs{w}_a + 3*\abs{w}_b)\mod 4 = 3 \Leftrightarrow (\abs{w}_a\!\mod 4+ (3*\abs{w}_b)\mod 4)\!\mod 4 = 3$. Der die Sprache $L_1$ akzeptierende endliche Automat $M_1$ sieht folgendermassen aus:
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  \node[initial,state] (A)                    {$q_0$};
+  \node[state]         (B) [right of=A]		  {$q_1$};
+  \node[state]         (C) [below of=B]		  {$q_2$};
+  \node[accepting,state]         (D) [left of=C]		  {$q_3$};
+  
+  \path (A) edge  [bend left] node {a} (B)
+  		(B) edge  [bend left] node {b} (A)
+		(B) edge  [bend left] node {a} (C)
+  		(C) edge  [bend left] node {b} (B)
+		(C) edge  [bend left] node {a} (D)
+  		(D) edge  [bend left] node {b} (C)
+		(D) edge  [bend left] node {a} (A)
+  		(A) edge  [bend left] node {b} (D);
+\end{tikzpicture} 
+\end{center}
+Es gilt $M_1 = (Q,\Sigma,\delta,F)$, wobei
+\begin{align*}
+Q &=\{q_0,q_1,q_2,q_3\} \\
+\Sigma &= \{a,b\} \\
+\delta: Q &\to Q \\
+q_i &\mapsto \begin{cases}
+   q_{(i+1)\!\!\!\!\mod 4} & \text{bei } a \\
+   q_{(i-1)\!\!\!\!\mod 4} & \text{bei } b
+  \end{cases} \\
+F &= \{q_3\}  
+\end{align*}
+
+Die Klassen sind wiefolgt:
+
+\begin{align*}
+\Kl [q_0] &= \{w\in\{a,b\}^* \mid (\abs{w}_a + 3 \cdot \abs{w}_b)\!\!\!\mod 4 = 0 \} \\
+\Kl [q_1] &= \{w\in\{a,b\}^* \mid (\abs{w}_a + 3 \cdot \abs{w}_b)\!\!\!\mod 4 = 1 \} \\
+\Kl [q_2] &= \{w\in\{a,b\}^* \mid (\abs{w}_a + 3 \cdot \abs{w}_b)\!\!\!\mod 4 = 2 \} \\
+\Kl [q_3] &= \{w\in\{a,b\}^* \mid (\abs{w}_a + 3 \cdot \abs{w}_b)\!\!\!\mod 4 = 3 \}
+\end{align*}
+
+\item Der die Sprache $L_2$ akzeptierende endliche Automat $M_2$ sieht folgendermassen aus:
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  \node[initial,state] (A)                    {$q_0$};
+  \node[state]         (B) [right of=A]		  {$q_1$};
+  \node[state]         (C) [right of=B]		  {$q_2$};
+  \node[state]         (D) [right of=C]		  {$q_3$};
+  \node[accepting,state] (E) [right of=D]	  {$q_4$};
+  \node[state]         (F) [below of=A]		  {$q_5$};
+  
+  \path (A) edge  [bend left] node {a} (B)
+  		(A) edge  			  node {b} (F)
+		(B) edge  			  node {a} (F)
+  		(B) edge  [bend left] node {b} (C)
+		(C) edge  [loop below] node {a} (C)
+  		(C) edge  [bend left] node {b} (D)
+		(D) edge  [bend left] node {a} (C)
+  		(D) edge  [bend left] node {b} (E)
+		(E) edge  [loop right] node {a,b} (E)
+		(F) edge  [loop right] node {a,b} (F);
+\end{tikzpicture} 
+\end{center}
+
+Es gilt $M_2 = (Q,\Sigma,\delta,F)$, wobei
+\begin{align*}
+Q &=\{q_0,q_1,q_2,q_3,q_4,q_5\} \\
+\Sigma &= \{a,b\} \\
+\delta: Q &\to Q \\
+q_0 &\mapsto \begin{cases}
+   q_1 & \text{bei } a \\
+   q_5 & \text{bei } b
+  \end{cases} \\
+q_1 &\mapsto \begin{cases}
+   q_5 & \text{bei } a \\
+   q_2 & \text{bei } b
+  \end{cases} \\
+q_2 &\mapsto \begin{cases}
+   q_2 & \text{bei } a \\
+   q_3 & \text{bei } b
+  \end{cases} \\
+q_3 &\mapsto \begin{cases}
+   q_2 & \text{bei } a \\
+   q_4 & \text{bei } b
+  \end{cases} \\
+q_4 &\mapsto q_4 \\
+q_4 &\mapsto q_5 \\
+F &= \{q_4\}  
+\end{align*}
+
+Die Klassen sind wiefolgt:
+
+\begin{align*}
+\Kl [q_0] &= \{\lambda\} \\
+\Kl [q_1] &= \{a\} \\
+\Kl [q_2] &= \{aby \mid y\in\{a,b\}^* \land y\text{ enthält nicht das Teilwort }bb \land y\text{ endet in }a \} \\
+\Kl [q_3] &= \{abz \mid z\in\{a,b\}^* \land z\text{ enthält nicht das Teilwort }bb \land z\text{ endet in }b \} \\
+\Kl [q_4] &= \{abx \mid x\in\{a,b\}^* \land x\text{ enthält das Teilwort }bb \} \\
+\Kl [q_5] &= \{w \mid w\in\{a,b\}^* \land w\text{ beginnt mit }b \lor w\text{ beginnt mit }aa\} \\
+\end{align*}
+
+\end{enumerate}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 8
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\begin{enumerate}[(a)]
+\item Der erste Teilautomat sieht folgendermassen aus:
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  \node[initial,state] (A)                    {$q_0$};
+  \node[state]         (B) [right of=A]		  {$q_1$};
+  \node[accepting,state] (C) [right of=B]		  {$q_2$};
+  
+  \path (A) edge  [bend left] node {a,b,c} (B)
+		(B) edge  [bend left] node {a,b,c} (C)
+		(C) edge  [bend left] node {a,b,c} (A);
+  
+\end{tikzpicture} 
+\end{center}
+Die Klassen dieses endlichen Automaten sind:
+\begin{align*}
+\Kl [q_0] &= \{w\in\{a,b,c\}^* \mid \abs{w}\!\!\!\mod 3 = 0 \} \\
+\Kl [q_1] &= \{w\in\{a,b,c\}^* \mid \abs{w}\!\!\!\mod 3 = 1 \} \\
+\Kl [q_2] &= \{w\in\{a,b,c\}^* \mid \abs{w}\!\!\!\mod 3 = 2 \} 
+\end{align*}
+Der zweite Teilautomat sieht folgendermassen aus:
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  \node[initial,state] (A)		                  {$q_0$};
+  \node[state]         (B)   [right of=A]		  {$q_1$};
+  \node[accepting,state] (C) [right of=B]		  {$q_2$};
+  \node[state]		   (D)	 [below of=B]		  {$q_3$};
+  
+  \path (A) edge  [loop above] node {a,b} (A)
+  		(A) edge  [bend left] node {c} (B)
+		(B) edge  			  node {a,b} (D)
+  		(B) edge  [bend left] node {c} (C)
+		(C) edge [loop above] node {a,b} (C)
+  		(C) edge  			  node {c} (D)
+		(D) edge [loop below] node {a,b,c} (D);
+\end{tikzpicture} 
+\end{center}
+Die Klassen dieses endlichen Automaten sind:
+\begin{align*}
+\Kl [q_0] &= \{w\in\{a,b\}^* \} \\ 
+\Kl [q_1] &= \{wc, w\in\{a,b\}^*\} \\
+\Kl [q_2] &= \{w_1 cc w_2 \mid w_1,w_2 \in\{a,b\}^* \} \\
+\Kl [q_3] &= \{wcw_1w_2 \mid w_1 \in \{a,b\}^* \lor w_1 = cc, w_2 \in \{a,b,c\}^* \} 
+\end{align*}
+
+Der zusammengesetzte endliche Automat sieht so aus:
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  \node[initial,state] (A)							{$q_{00}$};
+  \node[state]         (B)  [right of=A]			{$q_{01}$};
+  \node[state]		   (C)  [right of=B]			{$q_{02}$};
+  \node[state]		   (D)	[below of=A]			{$q_{10}$};
+  \node[state]         (E)  [right of=D]			{$q_{11}$};
+  \node[state]		   (F)  [right of=E]			{$q_{12}$};
+  \node[state]		   (G)	[below of=D]			{$q_{20}$};
+  \node[state]         (H)  [right of=G]			{$q_{21}$};
+  \node[accepting,state](I)	[right of=H]			{$q_{22}$};
+
+  \node[state]		   (J)	 [below of=H]		  {$q_{3}$};
+  
+  \path (A) edge			node {a,b} 	(D)
+  		(A) edge			node {c}	(E)
+		(B) edge [bend left]node[below left] {a,b} 	(J)
+		(B) edge			node {c} 	(E)
+		(C) edge			node {a,b} 	(F)
+		(C) edge[bend right]node {c} 	(J)
+		(D) edge 			node {a,b} 	(G)
+		(D) edge 			node {c} 	(H)
+		(E) edge[bend right]node[left] {a,b} (J)
+		(E) edge 			node {c} 	(I)
+		(F) edge 			node {a/b} 	(I)
+		(F) edge			node {c} 	(J)
+		(G) edge [bend left]node {a/b}  (A)
+		(G) edge 			node {c} 	(B)
+		(H) edge 			node {a,b}	(J)
+		(H) edge 			node[above] {c} 	(C)
+		(I) edge[bend right=38]node[right] {a,b}	(C)
+		(I) edge 			node {c} 	(J)
+		(J) edge[loop below]node {a,b,c}(J)
+		;
+\end{tikzpicture} 
+\end{center}
+\item Wir benutzen die erneut die Methode des modularen Entwurfs. Die erste Bedingung (``$\abs{w}$ ist gerade'') lässt sich durch den folgenden endlichen Automaten darstellen.
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  \node[initial,accepting,state] (A)			{$q_0$};
+  \node[state]         (B) [below of=A]			{$q_1$};
+  
+  \path (A) edge [bend left] node {1,0}		(B)
+  		(B) edge [bend left] node {1,0} 	(A);
+		
+\end{tikzpicture} 
+\end{center}
+Die zweite Bedingung (``$w$ ist die Binärdarstellung einer durch drei teilbaren Zahl'') so:
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  \node[initial,accepting,state] (A)			{$q_0$};
+  \node[state]         (B) [right of=A]		 	{$q_1$};
+  \node[state]         (C) [right of=B]			{$q_2$};
+  
+  \path (A) edge [loop above]	node {0} (A)
+  		(A) edge [bend left]	node {1} (B)
+		(B) edge [bend left]	node {0} (C)
+  		(B) edge [bend left] 	node {1} (A)
+  		(C) edge [bend left]	node {0} (B)
+		(C) edge [loop above]	node {1} (C)
+		;
+\end{tikzpicture} 
+\end{center}
+
+Zusammengesetzt entsprechen diese zwei Automata diesem:
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  \node[initial,accepting,state] (A)		          {$q_{00}$};
+  \node[state]         (B)   [right of=A]		  {$q_{01}$};
+  \node[state]		   (C)   [right of=B]		  {$q_{02}$};
+  \node[state]		   (D)	 [below of=A]         {$q_{10}$};
+  \node[state]         (E)   [right of=D]		  {$q_{11}$};
+  \node[state]		   (F)   [right of=E]		  {$q_{12}$};
+  
+  \path (A) edge[bend left] node {1} 	(E)
+  		(A) edge			node {0}	(D)
+		(B) edge[bend left] node {1} 	(D)
+		(B) edge[bend left] node {0} 	(F)
+		(C) edge[bend left] node {1} 	(F)
+		(C) edge[bend left] node {0} 	(E)
+		(D) edge[bend left] node {1} 	(B)
+		(D) edge[bend left] node {0} 	(A)
+		(E) edge[bend left] node {1} 	(A)
+		(E) edge[bend left] node {0} 	(C)
+		(F) edge			node {1} 	(C)
+		(F) edge[bend left] node {0} 	(B)
+		;
+\end{tikzpicture} 
+\end{center}
+
+Der zweite endliche Automat lässt sich durch folgendes $\delta$ beschreiben:
+\begin{enumerate}[i)]
+\item $\delta(q_0,0) = q_0$: Die Zahl ist durch drei teilbar und wird mit 2 multipliziert. Sie ist immer noch durch drei teilbar.
+\item $\delta(q_0,1) = q_1$: Ein Vielfaches von drei wird mit zwei multipliziert und um eins erhöht. $\exists k n = 3k \implies 2n+1 = 6k+1 \implies (2n+1)\mod 3 = 1$
+\item $\delta(q_1,0) = q_2$: $\exists k n = 3k+1 \implies 2n = 6k+2 \implies (2n)\mod 3 = 2$
+\item $\delta(q_1,1) = q_0$: $\exists k n = 3k+1 \implies 2n+1 = 6k+3 \implies (2n+1)\mod 3 = 0$
+\item $\delta(q_2,0) = q_1$: $\exists k n = 3k+2 \implies 2n = 6k+4 \implies (2n)\mod 3 = 1$
+\item $\delta(q_2,1) = q_2$: $\exists k n = 3k+2 \implies 2n+1 = 6k+5 \implies (2n+1)\mod 3 = 2$
+\end{enumerate}
+
+Das zusammengesetzte Modell erweitert diese Beschreibung in dem es für jeden Zustand noch die Möglichkeit ``gerade/ungerade Länge'' gibt.
+
+\end{enumerate}
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 9
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\begin{enumerate}[(a)]
+\item Wir führen einen Widerspruchsbeweis und stützen uns auf das Pumping-Lemma. Man nehme an, es existiere ein $n_0$, so dass für alle $w \in L_1 \abs{w} \geq n_0$ gilt, es existiere eine Zerlegung $w=yxz$, welche die Bedingungen $(i), (ii)$ und $(iii)$ des Pumping Lemmas erfüllt. Sei nun $w=0^{n_0}1^{2n_0}0^{n_0}$. Dann gilt aufgrund der Bedingung $(i)$, dass $x=0^i$, mit $1\leq i\leq n_0$. Somit gilt nicht, dass $yx^iz\in L_1$ für alle $i$, da die erste Nullfolge verändert wird, aber nicht der Rest, also wird $(iii)$ gebrochen. Somit haben wir einen Widerspruch, und $L_1$ ist nicht regulär.
+
+\item Wir führen wieder einen Widerspruchsbeweis und stützen uns erneut auf das Pumping-Lemma. Die Annahmen seien gleich wie in (a). Diesmal definieren wir $w = 0^{{n_0}^3}$. Es muss also eine Zerlegung für $w$ von der Form $w = y^ix^jz^{{{n_0}^3}-i-j}$ existieren, wenn die Sprache regulär ist. Man definiere nun $|x| = r, |y|=s$. Es gilt aber nicht, dass $\{yx^iz | i\in \mathbb{N} \} \subseteq L_1$, denn $yx^2z = 0^s0^{2r}0^{{{n_0}^3}-r-s}=0^{{{n_0}^3}+r}$. Dies ist aber kleiner als die nächste Kubikzahl ${n_0}^3=(n_0+1)^3=n_0^3+3n_0^2+3n_01 \ge n_0^3+r, da r \le n_0$. Somit ist Bedingung $(iii)$ nicht erfüllt und die Sprache nicht regulär.
+\end{enumerate}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

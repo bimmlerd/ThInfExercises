@@ -1,0 +1,391 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[swissgerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{enumerate} % used for enumerate args
+\usepackage{multicol} % columns
+
+\usepackage{pgf} 
+\usepackage{tikz}
+\usepackage{forest} % treees :D
+\usetikzlibrary{arrows,automata} %for FSM
+
+% Custom commands
+\DeclareMathOperator{\Kl}{Kl} %Klassen von Zuständen
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+% Shamelessly copied from http://tex.stackexchange.com/questions/43008/absolute-value-symbols
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} % nice |x|
+\DeclarePairedDelimiter\norm{\lVert}{\rVert} % nice ||x||
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+%\chead{\hmwkClass\ (\hmwkClassInstructor\): \hmwkTitle} % Top center head
+%\rhead{\firstxmark} % Top right header
+\rhead{}
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Seite\ \thepage\ von\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Pascal} % Load Pascal syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Pascal in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Pascal functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Pascal function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Pascal functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Pascal function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+        %
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .p), the second parameter is the caption
+\newcommand{\pascalscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.p}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+%\newcommand{\enterProblemHeader}[1]{
+%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%}
+
+% Header and footer for when a page split occurs between problem environments
+%\newcommand{\exitProblemHeader}[1]{
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{}\nobreak
+%}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Aufgabe \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+%\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+%\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+%\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+%\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Selbststudium\ -\ Blatt\ 1} % Assignment title
+\newcommand{\hmwkDueDate}{24.\ Oktober\ 2014} % Due date
+\newcommand{\hmwkClass}{Theoretische Infomatik} % Course/class
+\newcommand{\hmwkClassInstructor}{Prof. Hromkovič} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Vincent von Rotz, David Bimmler und Kevin Klein} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Abgabe\ bis\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor}
+\vspace{3in}
+}}
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\addtocounter{homeworkProblemCounter}{0}
+\newpage
+%\tableofcontents
+%\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\begin{itemize}
+\item \(G_1\) \\
+The pure application of the derivation rules leads to the following:
+\[XaYaZ \rightarrow a^{i}XaYaZ
+	\rightarrow a^{i}baYaZ
+	\rightarrow a^{i}bab^{j}YaZ
+	\rightarrow a^{i}bab^{j}aaZ
+	\rightarrow a^{i}bab^{j}aac^{k}Z
+	\rightarrow a^{i}bab^{j}aac^{k}\]
+Hence, let us define the language we would expect from this grammar:
+\[ L_1 := \{ a^{i}bab^{j}aac^{k} \mid i,j,k \in \mathbb{N} \} \]
+Let's prove \(L_1 = L(G_1)\) by proving mutual inclusions.
+
+\begin{itemize}
+	\item \(L_1 \subseteq L(G_1) \)   \\*
+		\begin{gather*}
+		w \in L_1 \Rightarrow \exists i,j,k \in \mathbb{N} \mid w =  a^{i}bab^{j}aac^{k} \\
+		\text{Let's see if we can generate such a word in the scope of grammar \(G_1\).} \\
+		S \rightarrow XaYaZ \text{ is applied anyway} \\
+		\text{We can apply } X \rightarrow aX \text{ i times, followed by } X \rightarrow b \\
+		XaYaZ \rightarrow a^{i}baYaZ \\
+		\text{We can apply } Y \rightarrow bY \text{ j times, followed by } Y \rightarrow a \\
+		a^{i}baYaZ \rightarrow a^{i}bab^{j}aaZ \\
+		\text{We can apply } Z \rightarrow cZ \text{ k times, followed by } Z \rightarrow c \\
+		a^{i}bab^{j}aaZ \rightarrow a^{i}bab^{j}aac^{k} \\
+		\text{As we strictly applied the derivation rules of \(G_1\) for any word of \(L_1\), the inclusion is proven.}
+		\end{gather*}
+	\item \(L(G_1) \subseteq L_1 \)   \\*
+		\begin{gather*}
+		\text{Assume } w \in L(G_1) \\
+		\text{We know that w has been generated by a finite number of applications of derivations rules, starting with S.} \\
+		\text{There is only one possible derivation with S as left-hand side.} \\
+		\rightarrow XaYaZ \\
+		\text{X can only be replaced by either aX or b.} \\
+		\text{It is obvious that any finite sequence of applications of those rules leads to something of the pattern \(a^{i}b\)} \\
+		\text{Y can only be replaced by either bY or a.} \\
+		\text{It is obvious that any finite sequence of applications of those rules leads to something of the pattern \(b^{j}a\)} \\
+		\text{Z can only be replaced by either cZ or \(\lambda\) .} \\
+		\text{It is obvious that any finite sequence of applications of those rules leads to something of the pattern \(c^{k}\)} \\
+		\text{Putting it all together, this results in a word of the pattern \(a^{i}bab^{j}aac^{k}\), which is the exact definition of \(L_1\)}\\
+		\end{gather*}
+	\end{itemize}
+\item \(G_2\)
+	\begin{itemize}
+ 		\item
+		\[\text{If }S \rightarrow 0 \text{ is applied, } w \in L(G_2) \Rightarrow w = 0\] \\
+		\item
+		\begin{gather*}
+		\text{If not, } S \rightarrow X1X1X1XY \text{ is applied } \\
+		X1X1X1XY \rightarrow 0^{i}10^{j}10^{k}10^{l}Y \\
+		0^{i}10^{j}10^{k}10^{l}Y \rightarrow 0^{i}10^{j}10^{k}10^{l}[X1X1X1X1XY] \\
+		0^{i}10^{j}10^{k}10^{l}[X1X1X1X1XY] \rightarrow 0^{i}10^{j}10^{k}10^{l}[0^{m}10^{n}10^{o}10^{p}10^{q}Y] \\
+		\text{Y can be recursively replaced finitely many times.} \\
+		A_1 := \{0\}^{\ast}, w_i \in A \\
+		A_2 := \{w_{0}1w_{1}1w_{2}1w_{3}1w_{4}\}^{\ast}, A_3 \in A_2 \\
+		\Rightarrow w \in A \cdot \{1\} \cdot A \cdot \{1\} \cdot A \cdot \{1\} \cdot A \cdot A_3  \\
+		\Rightarrow L(G_2) =: L_2 = A \cdot \{1\} \cdot A \cdot \{1\} \cdot A \cdot \{1\} \cdot A \cdot A_3
+		\end{gather*}
+	\end{itemize}
+\end{itemize}
+
+
+
+
+%L_1
+\end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\begin{enumerate}[(a)]
+\item
+	Let's treat both conditions seperately. \\
+	\begin{itemize}
+	\item
+		\( (|x|_a - |x|_b) \text{ mod } 3 = 1 \) \\
+		Let X,Y,Z be non-terminals. \\
+		\(X \rightarrow   (|x|_a - |x|_b) \text{ mod } 3 = 1 ;  Y \rightarrow   (|x|_a - |x|_b) \text{ mod } 3 = 2 ; Z \rightarrow   (|x|_a - |x|_b) \text{ mod } 3 = 0  \) \\
+		Let's define the derivation rules.
+		\[S \rightarrow aX ; S \rightarrow bY \] 
+		\[X \rightarrow \lambda ; X \rightarrow aY ; X \rightarrow bZ\] 
+		\[Y \rightarrow aZ ; Y \rightarrow bX \] 
+		\[Z \rightarrow aX ; Z \rightarrow bY \] 
+	\item
+		\(bbb \in x\) \\
+		\begin{gather*}
+		S \rightarrow aA ; S \rightarrow bB_1 \\
+		A \rightarrow aA ; A \rightarrow bB_1 \\
+		B_1 \rightarrow aA ; B_1 \rightarrow bB_2 \\
+		B_2 \rightarrow aA ; B_2 \rightarrow bB_3 \\
+		B_3 \rightarrow aB_3 ; B_3 \rightarrow bB_3 ; B_3 \rightarrow \lambda \\
+		\end{gather*}
+	\end{itemize}
+	P is the set containing all those rules.
+\item
+	Let's define the first rule. \\
+	\(S \rightarrow 001A101D011 \) \\
+	Let's treat both conditions seperately. \\
+	\begin{itemize}
+		\item \(|x| \text{ mod } 3 = 0 \) 
+			\begin{gather*}
+				A \rightarrow 0A ; A \rightarrow 1B ; A \rightarrow \lambda \\
+				B \rightarrow 0B ; B \rightarrow 1C \\
+				C \rightarrow 0C ; C \rightarrow 1A \\
+			\end{gather*}
+		\item \(|y|_0 \text{ mod } 2 = 1 \)
+			\begin{gather*}
+				D \rightarrow 1D ; D \rightarrow 0E \\
+				E \rightarrow 1E ; E \rightarrow 0D ; E \rightarrow \lambda \\
+			\end{gather*}
+	\end{itemize}
+	P is the set containing all those rules.
+\end{enumerate}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+In order to get to grammar regular and normed, the following derivation rules have to be adapted:
+\begin{enumerate}[(1)]
+\item \(S \rightarrow bS\)
+\item \(S \rightarrow aaaX\)
+\item \(Y \rightarrow bbZ\)
+\item \(Y \rightarrow X\)
+\item \(Y \rightarrow \lambda\)
+%\item \(Z \rightarrow aZ\)
+\end{enumerate}
+They become
+\begin{enumerate}[(1):]
+\item \(S \rightarrow bH_0 ; H_0 \rightarrow bS ; H_0 \rightarrow aH_1 ; H_0 \rightarrow bY\)
+\item \( S \rightarrow aH_1 ; H_1 \rightarrow aH_2 ; H_2 \rightarrow aX \)
+\item \(Y \rightarrow bH_3 ; H_3 \rightarrow bZ\)
+\item X only derivates to b, hence we can replace (4) by: \(Y \rightarrow b\)
+\item There is only one rule with Y as right-hand side. Hence substituting Y by \(\lambda\) is that rule is sufficient: \(S \rightarrow b\)
+\end{enumerate}
+We also need $Z \to b$, since we had $Z\to bY\to\lambda$.
+%(6): \(Z \rightarrow aH_4 ; H_4 \rightarrow aZ ; \) every other relation from H4 to something Z derivates to \\
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  \node[initial,state] (A)                    {$S$};
+  \node[state]         (B) [right of=A]		  {$H_1$};
+  \node[state]         (C) [right of=B,node distance=1.5cm]		  {$H_2$};
+  \node[state]         (D) [right of=C]		  {$X$};
+  \node[accepting,state]         (E) [right of=D]			{$Q$};
+  \node[accepting,state]         (F) [below right of=A]		{$Y$};
+  \node[state]         (G) [below of=F,node distance=1.75cm]{$H_3$};
+  \node[accepting,state]         (H) [below right of=F]		{$Z$};
+  
+  \path (A) edge  			 	node {a} (B)
+  		(A) edge  [loop above] 	node {b} (A)
+  		(A) edge  [bend left] 	node {b} (E)
+		(A) edge				node {b} (F)
+  		(B) edge				node {a} (C)
+  		(C) edge				node {a} (D)
+  		(D) edge				node {b} (E)
+		(F) edge 				node {a} (D)
+		(F) edge 				node[below] {b} (E)
+		(F) edge 				node {b} (G)
+		(G) edge				node[above] {b} (H)
+		(H) edge 				node[above right] {b} (F)
+		(H) edge 				node[below] {a,b} (E)
+		(H) edge [loop below]	node {a} (H);
+\end{tikzpicture} 
+\end{center}
+
+\end{homeworkProblem}
+
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

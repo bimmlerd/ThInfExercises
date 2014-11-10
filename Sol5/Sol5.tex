@@ -1,0 +1,294 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[swissgerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{enumerate} % used for enumerate args
+\usepackage{multicol} % columns
+
+\usepackage{pgf} 
+\usepackage{tikz}
+\usepackage{forest} % treees :D
+\usetikzlibrary{arrows,automata} %for FSM
+
+% Custom commands
+\DeclareMathOperator{\Kl}{Kl} %Klassen von Zuständen
+\DeclareMathOperator{\Kod}{Kod} %Kodierung von TMs
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+% Shamelessly copied from http://tex.stackexchange.com/questions/43008/absolute-value-symbols
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} % nice |x|
+\DeclarePairedDelimiter\norm{\lVert}{\rVert} % nice ||x||
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+%\chead{\hmwkClass\ (\hmwkClassInstructor\): \hmwkTitle} % Top center head
+%\rhead{\firstxmark} % Top right header
+\rhead{}
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Seite\ \thepage\ von\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Pascal} % Load Pascal syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Pascal in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Pascal functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Pascal function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Pascal functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Pascal function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+        %
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .p), the second parameter is the caption
+\newcommand{\pascalscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.p}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+%\newcommand{\enterProblemHeader}[1]{
+%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%}
+
+% Header and footer for when a page split occurs between problem environments
+%\newcommand{\exitProblemHeader}[1]{
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{}\nobreak
+%}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Aufgabe \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+%\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+%\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+%\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+%\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Übungsaufgaben\ -\ Blatt\ 5} % Assignment title
+\newcommand{\hmwkDueDate}{31.\ Oktober\ 2014} % Due date
+\newcommand{\hmwkClass}{Theoretische Infomatik} % Course/class
+\newcommand{\hmwkClassInstructor}{Prof. Hromkovič} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Kevin Klein, David Bimmler und Vincent von Rotz} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Abgabe\ bis\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor}
+\vspace{3in}
+}}
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\addtocounter{homeworkProblemCounter}{13}
+\newpage
+%\tableofcontents
+%\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 14
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+%Wir führen einen Widerspruchsbeweis:
+%\\Wir nehmen an, dass $L_1 \in \mathcal{L}_R$
+%\\ $\Rightarrow L_1 = L(M)$ für eine TM $M$
+%\\ $\Rightarrow \exists k \in \N$
+
+
+Wir beweisen $L_{1} \not\in \mathcal{L}_{RE}$ indirekt mit einem Widerspruchsbeweis. Dann ist $L_{1} = L(M)$ für eine TM $M$. Weil $M$ eine der Turingmaschinen in der Nummerierung aller Turingmaschinen sein muss, existiert ein $i \in \mathbb{N} - \{0\}$, so dass $M = M_i$. Aber $L_{1}$ kann nicht gleich $L(M_i)$ sein, weil folgende Äquivalenz gilt:
+\begin{equation*}
+{w_{{i^3}+5}} \in L_{1} \Longleftrightarrow d_{i,{i^3}+5} = 0 \Longleftrightarrow w_{i^3+5} \not\in L(M_i),
+\end{equation*}
+d.h., $w_{{i^3}+5}$ ist in genau einer der Sprachen $L_{1}$ oder $L(M_i)$.
+\\
+\\
+Dieselbe Methode funktioniert nicht für $L_2$, da wir verwendet haben, dass $L_1$ von irgendeiner TM erzeugt werden muss, falls $L_1 \in \mathcal{L}_{RE}$. D.h., wir haben alle TM $M$ betrachtet, was die Definition von $L_2$ nicht ermöglicht.
+
+\end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+%	PROBLEM 15
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\begin{enumerate}[a)]
+
+\item Wir wissen (aus einem Lemma im Skript), dass $L_U \in \mathcal{L}_{RE}$. Aus Teilaufgauben b) und c) lernen wir, dass $L_U \leq_{EE} L_{union}$ und $L_{union} \leq_{EE} L_U$. Es liegt somit auf der Hand, dass auch $L_{union} \in \mathcal{L}_{RE}$.
+
+\item Wir beweisen $L_U \,{\leq}_{EE}\, L_{union}$ im Formalismus der Turingmaschinen. Wir beschreiben eine TM $M$, die $L_U$ auf $L_{union}$ reduziert. Für die Eingabe $x$ arbeitet $M$ wie folgt:
+\par $M$ überprüft, ob die Eingabe die Form $x = \Kod(M_1)\#w$ für eine TM $M_1$ und ein $w \in ({\Sigma}_{bool})^* $ hat.
+{\begin{enumerate}[i)]
+
+\item Falls x nicht besagte Form hat, so wird die Kodierung $\Kod(M_{\emptyset})$ einer TM $M_{\emptyset}$ generiert, die keine Eingabe akzeptiert, sondern immer direkt ablehnt. Dann wird noch das Symbol $\#$ angefügt, die $\Kod(M_{\emptyset})$ wiederholt und nochmal ein $\#$ angehängt. Dann hält M mit dem Bandinhalt $ M(x) = \Kod(M_{\emptyset})\#\Kod(M_{\emptyset})\# $.
+\item Falls $x=\Kod(M_1)\#w$, dann modifiziert M die Eingabe folgendermassen: Es wird vor die Kodierung der Touringmaschine die Kodierung $\Kod(M_{\emptyset})$ einer zweiten Turingmaschine eingefügt. Diese Turingmaschine akzeptiert wiederum keine Eingabe und lehnt sofort ab. M beendet seine Arbeit mit dem Bandinhalt $M(w) = \Kod(M_{\emptyset})\#\Kod(M_1)\#w$.
+\end{enumerate}}
+
+Nun beweisen wir für alle $x \in {\{0,1,\#\}}^*$, dass
+\begin{equation*}
+x \in L_U \Longleftrightarrow M(x) \in L_{union}
+\end{equation*}
+Sei $x \in L_U$. Daher ist $x=\Kod(M_1)\#w$ für eine TM $M_1$ und ein Wort $w \in {\{0,1\}}^*$.  Dann ist $M(x) = \Kod(M_{\emptyset})\#\Kod(M_1)\#w$.Wenn $L_U$ nun $x$ akzeptiert, bedeutet das, dass $w \in L(M_1)$. Somit gilt auch $w \in L(M_1) \cup L(M_{\emptyset})$ und also $x \in L_{union}$.
+\par Sei $x \not\in L_U$. Das bedeutet entweder, dass es nicht von der Form $x = \Kod(M_1)\#w$ ist, oder dass $M_1 x$ nicht akzeptiert. Im ersten Fall gilt $M(x) = \Kod(M_{\emptyset})\#\Kod(M_{\emptyset})\#$. Da $\lambda \not\in L(M_{\emptyset}) \cup L(M_{\emptyset})$ ist $x \not\in L_{union}$. Ansonsten ist $M(x)=\Kod(M_{\emptyset})\#\Kod(M_1)\#w$. Es gilt: 
+\par $x \not\in L_U \Rightarrow w \not\in L(M_1) \Rightarrow w \not\in L(M_{\emptyset}) \cup L(M_1) \Rightarrow x\not\in L_{union}$
+
+\pagebreak
+\item Wir beschreiben wiederum eine TM $B$. $B$ arbeitet für die Eingabe x wie folgt:
+\par Ist x nicht von der Form $Kod(M)\#Kod(M')\#w$, wobei $M, M'$ Turingmaschinen sind und $w \in ({\Sigma}_{bool})^*$, so gibt $B \: \lambda$ zurück.
+\par Ansonsten kreieren wir eine NTM (die ja gleichwertig ist zu einer TM) $M_U$, die zu Beginn nichtdeterministisch entscheidet, ob sie ihre Eingabe mit $M$ oder mit $M'$ überprüfen soll. Wenn einer der beiden Berechnungspfade in einem akzeptierten Zustand landet, so soll $M_U$ akzeptieren. Die jeweligen Verwerfzustände von $M$ und $M'$ werden aufgehoben. Somit terminiert $M_U$ akzeptierend, wenn die Eingabe $\in L(M) \cup L(M')$ ist, und terminiert sonst nicht. $B$ gibt die Kodierung dieser Turingmaschine zurück: $B(x)=Kod(M_U)$
+
+Nun beweisen wir für alle $x \in {\{0,1,\#\}}^*$, dass
+\begin{equation*}
+x \in L_{union} \Longleftrightarrow B(x) \in L_U
+\end{equation*}
+Sei $x \in L_{union}$. Dies bedeutet, dass $x = Kod(M)\#Kod(M')\#w$ und $w \in L(M)$ oder $w \in L(M')$. Folglich gilt auch $w \in L(M) \cup L(M')$ und also auch $B(x) \in L_U$.
+\par Sei $x \not\in L_{union}$. Dann gilt entweder $x \neq Kod(M)\#Kod(M')\#w$ oder $w \not\in L(M) \wedge w \not\in L(M')$. Im ersten Fall ist $B(x) = \lambda \not\in L_U$. Ansonsten gilt $B(x)=M_U\#w \not\in L_U$, da $M_U$ mit der Eingabe $w$ niemals terminiert.
+\end{enumerate}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 16
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+\begin{enumerate}[a)]
+\item Wir zeigen, dass $L_H\, {\leq}_{EE}\, L_U$, woraus $L_H \, {\leq}_R \, L_U$ folgt. Wir konstruieren also eine Turingmaschine A, die die Eingabe.
+
+Falls x nicht von der Form $Kod(M_3)\#w$ ist, so gibt A $\lambda$ aus.
+
+Falls x aber diese Form hat, so kreieren wir eine neue Turingmaschine $M_3'$, die zu $M_3$ identisch ist bis auf eine Änderung: wir passen $\delta$ an, indem wir jegliche Transition der Form $\delta(q,a) = q_{reject}$ zu $\delta '(q,a) = q_{accept}$ ändern. A gibt dann $Kod(M_3')\#w$ aus.
+
+Nun beweisen wir für alle $x \in {\{0,1,\#\}}^*$, dass
+\begin{equation*}
+x \in L_H \Longleftrightarrow A(x) \in L_{U}
+\end{equation*}
+Sei $x \in L_H$. Somit hat x die Form $x=Kod(M_3)\#w$. Nun ist $A(x)=Kod(M_3')\#w$. Wir wissen, dass $M_3$ mit $w$ als Eingabe hält. Zudem wissen wir, dass in $M_3' \: q_{reject}$ durch $q_{accept}$ ersetzt wurde. Dies bedeutet, dass die $M_3'$ akzeptiert, solange sie hält. Somit ist klar, dass $M_3' \: w$ akzeptiert, und somit gilt $A(x) \in L_U$.
+\par Sei $x \not\in L_H$. Falls $x$ nicht von der angegebenen Form ist, so ist $A(x)=\lambda$. $\lambda \not\in L_U$ ist offensichtlich. Ansonsten ist $A(x) = Kod(M_3')\#w$. Falls $x \not\in L_H$ bedeutet das, dass die $L_H$ mit der Eingabe $x$ nicht hält. Somit hält auch $A(X)$ mit derselben Eingabe nicht und $A(x) \not\in L_U$.
+
+\item
+
+\end{enumerate}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

@@ -1,0 +1,4 @@
+\select@language {swissgerman}
+\contentsline {section}{Aufgabe 4}{3}
+\contentsline {section}{Aufgabe 5}{3}
+\contentsline {section}{Aufgabe 6}{3}
