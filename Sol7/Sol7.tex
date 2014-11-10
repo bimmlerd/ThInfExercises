@@ -39,6 +39,12 @@
 
 % Custom commands
 \DeclareMathOperator{\Kl}{Kl} %Klassen von Zuständen
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Oh}{\mathcal{O}}
+\newcommand{\Lcl}{\mathcal{L}}
+\newcommand{\Th}{\Theta}
 
 \usepackage{mathtools}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
@@ -211,7 +217,8 @@
 
 \begin{homeworkProblem}
 \begin{enumerate}[(a)]
-\item asd
+\item Es gilt zu beweisen, dass die Funktion $e(n)=3^n$ zeitkonstuierbar ist. Es ist ausreichend, eine MTM zu beschreiben, welche mit der Eingabe $0^n$ auf dem ersten Arbeitsband $0^{3^n}$ generiert.
+Die MTM A schreibt zunächst einmal eine 0 auf das Arbeitsband. Dann liest A einmal die Eingabe $0^n$ von links nach rechts und schreibt dabei auf dem Arbeitsband für jede 0 den jetzigen Inhalt des Arbeitsbandes noch zwei Mal. Wenn der Kopf des Eingabebands dann \$ erreicht, hat das Arbeitsband die Länge $3^n$. Die Laufzeit dieses Verfahren ist $3^n-3^{n-1} \in \Oh(3^n)$
 \item asd
 \end{enumerate}
 \end{homeworkProblem}
