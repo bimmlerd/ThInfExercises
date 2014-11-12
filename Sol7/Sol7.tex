@@ -230,7 +230,28 @@ Dieses Verfahren hat eine Laufzeit welche in $\Oh(3^n)$ liegt: $n$ mal werden di
 
 \item Wir definieren folgende 3-Band TM A:
 
-Vor Beginn schreiben wir 1 auf Band 2. Solange der Lesekopf auf dem Eingabeband nicht \$ liest, addiert nun A den Inhalt der Bänder 2 und 3. Das Resultat wird auf das Band geschrieben, das jeweils länger nicht mehr geschrieben wurde. Wenn der Kopf des Eingabebandes \$ erreicht, wird das neuste geschriebene Band auf das erste Band (das Ausgabeband) kopiert. (Wenn das Eingabewort leer ist, so wird 0 ausgegeben). Die Ausgabe ist die $n$-te Fibonacci-Zahl.
+Vor Beginn schreiben wir binär 1 auf Band 2 und binär 0 auf Band 3.\\
+Die TM iteriert von links nach recht über die Eingabe der Form \(0^n\). \\
+Bei jeder Operation wird folgendes ausgeführt: 
+\begin{enumerate}[(i)]
+\item schreibe den Inhalt von AB2 auf AB4
+\item schreibe den Inhalt von AB2 + den Inhalt von AB3 auf AB2
+%carr-Arbeitsband für binäre Addition?
+\item schreibe den Inhalt von AB4 auf AB3 
+\end{enumerate}
+Am Ende haben wir in AB2 binär die Zahl \(fib(n)\). Diese zählen wir ab, und schreiben dementsprechend viele '\(0\)' in AB1. \\
+Jetzt gilt es noch die Anzahl an Schritten zu überprüfen.
+Alle Ausführungen von (i) führen zu \(\Oh(\sum_{i=1}^{n} log(f(i-1)))\) Schritten, da auf AB2 \(fib(i-1)\) steht und dies logartihmische Länge wegen der binären Darstellung hat. \\
+Alle Ausührungen von (ii) führen dementsprechend zu \(\Oh(\sum_{i=1}^{n} log(f(i-1)))\) Schritten. \\
+Alle Ausführungen von (iii) führen dementsprechend zu \(\Oh(\sum_{i=1}^{n} log(f(i-2)))\) Schritten. \\
+Das Ausgeben der \(fib(n)\ '0'\) führt offensichtlich zu \(\Oh(fib(n))\) Schritten. \\
+Es gilt also zu zeigen, dass \(\Oh(\sum_{i=1}^{n} log(f(i-1))) \in \Oh(fib(n)) \). \\
+Offensichtlich gilt: \(\Oh(\sum_{i=1}^{n} log(f(i-1))) \in \Oh(n*log(fib(n)))\) \\
+Wir wissen, dass \(fib(n) = \frac{1}{\sqrt{5}} * ((\frac{1+\sqrt{5}}{2})^n - (\frac{1-\sqrt{5}}{2})^n ) \) \\
+Somit gilt \( \lim_{n \to \infty} fib(n) = c^n \) für irgend ein \(c\). \\
+Daraus folgt: \( \lim_{n \to \infty} \frac{n*log(fib(n))}{fib(b)} = \frac{n*log(c^n)}{c^n} = \frac{n^2}{c^n} = 0 \) \\
+Damit haben wir gezeigt, was wir zeigen wollten.
+
 
 \end{enumerate}
 \end{homeworkProblem}
