@@ -233,8 +233,15 @@ Vor Beginn schreiben wir 1 auf Band 2. Solange der Lesekopf auf dem Eingabeband 
 
 \begin{homeworkProblem}
 \begin{enumerate}[(a)]
-\item ad
-\item ad
+\item Da wir wissen, dass für jede akzeptierte Eingabe $x \in L(M)$ die Berechnung in Time$_M (x)\leq t(\abs{x})$ erfolgt, können wir abbrechen, sobald länger brauchen.
+
+Wir bauen also eine neue Turingmaschine $M'$, mit einem zusätzlichen Arbeitsband. Vor Beginn konstruieren wir auf unserem neuen Band die binäre Codierung von $t(\abs{x})$. Da die Funktion $t$ zeitkonstruierbar ist, erfolgt dies in Zeit $\Oh(\abs{x})$. Nun beginnen wir mit der tatsächlichen Arbeit: wir lassen die ursprüngliche Maschine laufen, aber mit jedem Schritt dekrementieren wir unser neues Band um $1$. Wir wissen, dass dekrementieren amortisiert konstante Laufzeit hat (ausführlicher Beweis in Datenstrukturen und Algorithmen). Folglich bleibt die Laufzeit der ursprünglichen TM $M$ gleich.
+
+Wenn die ursprüngliche Maschine die Eingabe akzeptiert, so soll die neue TM $M'$ auch akzeptieren. Ansonsten verwirft $M'$ seine Eingabe, sobald unser neuer Zähler 0 erreicht.
+
+Die Laufzeit unserer neuen Turingmaschine $M'$ setzt sich zusammen aus der Laufzeit des Initialisieren des Zählers und der tatsächlichen Berechnung. Das Initialisieren des Zählers dauert (dank der Zeitkonstruierbarkeit) höchstens $\Oh(t(\abs{x}))$. Die tatsächliche Berechnung ist ebenfalls beschränkt durch $\Oh(t(\abs{x}))$, da diese sich ja gegenüber der Ursprünglichen TM nicht verändert hat. Nun gilt für unsere Gesamtlaufzeit: 
+
+Time$_{M'}(n) \in 2*\Oh(\abs{x}) \in \Oh(\abs{x})$
 \end{enumerate}
 \end{homeworkProblem}
 
