@@ -253,7 +253,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 \item \( (0+11) \)
 	Wir haben: \\
 
-	begin{center}
+	\begin{center}
 		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
   
@@ -278,8 +278,8 @@ Dazu gehen wir Schritt für Schritt vor. \\
   		\node[state]			(D) [right of=C]		{$q_3$};
  		\node[state]			(E) [right of=D]		{$q_4$};
   		\node[state,accepting]	(F) [right of=E]		{$q_5$}; 
-		\node[state] 			(G)[below=B]			{$q_6$};
-		\node[state] 			(H)[right of=G]		{$q_7$};   
+		\node[state] 			(G) [below of=B]		{$q_6$};
+		\node[state] 			(H) [right of=G]		{$q_7$};   
     
   		\path (A) edge  			node {$\epsilon$}		(B)
 			(A) edge  				node {$\epsilon$} 		(G)
@@ -309,7 +309,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
   		\node[state]			(F) [right of=E]		{$q_5$};
 		\node[state]			(G) [right of=F]		{$q_6$};
 		\node[state,accepting]	(H) [right of=G]		{$q_7$};
-		\node[state] 			(I) [below=B]			{$q_8$};
+		\node[state] 			(I) [below of=B]		{$q_8$};
 		\node[state] 			(J) [right of=I]		{$q_9$};   
     
   		\path (A) edge				node {$\epsilon$}		(B)
@@ -342,7 +342,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
   		\node[state]			(F) [right of=E]		{$q_5$};
 		\node[state]			(G) [right of=F]		{$q_6$};
 		\node[state]			(H) [right of=G]		{$q_7$};
-		\node[state] 			(I) [below=B]			{$q_8$};
+		\node[state] 			(I) [below of=B]		{$q_8$};
 		\node[state] 			(J) [right of=I]			{$q_9$};   
 		\node[state,accepting]	(K) [right of=H]		{$q_{10}$};
     
@@ -396,7 +396,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
   		\node[state]			(D) [right of =B]		{$q_3$};
 		\node[state]			(F) [right of=D]		{$q_5$}; 
 		\node[state,accepting]	(G) [below right of=B]	{$q_6$};
-		\node[state]			(M)[below G]			{Müll};
+		\node[state]			(M) [below of=G]		{Müll};
     
   		\path 
 			(B) edge  				node {1}				(D)
@@ -440,14 +440,14 @@ Dazu gehen wir Schritt für Schritt vor. \\
 	Mit Hilfe der Formel \( R_{ij} = R_{ij}^{k-1} + R_{ik}(R_{kk})^{*}R_{kj} \) können wir nun \(R_{13}^(k) \) für 				aufsteigende k berechnen.\\
 	\begin{enumerate}[-]
 	\item \(k = 1\)
-		\begin{tabular}[|l|c|r|]
+		\begin{tabular}{|l|c|r|}
 			& direktes Einfügen & vereinfacht \\
 			\hline \hline
 			\(R_{11}^1 \) & \(c + cc^{*}c \) & \( c^{*} \) \\
 			\(R_{12}^1 \) & \( (a + b) + c^{*} (a + b) \) & \(c^{*}(a+b) \) \\
 			\(R_{13}^1 \) & \( \emptyset + cc^{*} \emptyset\) & \( \emptyset\) \\
 			\(R_{21}^1 \) & \( \emptyset +  \emptyset c^{*}(a+b)\) & \(\emptyset\) \\
-			\(R_{22}^1 \) & \( (a+c) + \emptyset c^{*} (a+b)\) & \(\a+\centering\) \\
+			\(R_{22}^1 \) & \( (a+c) + \emptyset c^{*} (a+b)\) & \(a+\centering\) \\
 			\(R_{23}^1 \) & \(  b + \emptyset c{*}(a+b)\) & \( b\)     \\
 			\(R_{31}^1 \) & \( \emptyset + \emptyset c{*}\) & \( \emptyset\) \\
 			\(R_{32}^1 \) & \( c + \emptyset c{*} (a+b)\) & \( c \)  \\
@@ -455,12 +455,12 @@ Dazu gehen wir Schritt für Schritt vor. \\
 			\hline
 		\end{tabular}
 	\item \(k = 2\)
-		\begin {tabular}[|l|c|r|]
+		\begin {tabular}{|l|c|r|}
 			& direktes Einfügen & vereinfacht \\
 			\hline \hline
 			\(R_{11}^2 \) & \(c^{*} + c^{*}(a+b)(a+c)^{*} \emptyset \) & \( c^{*} \) \\
 			\(R_{12}^2 \) & \( c^{*}(a + b) + c^{*} (a + b)(a+c)^{*} \) & \(c^{*}(a+b)(a+c)^{*} \) \\
-			\(R_{13}^2 \) & \( \emptyset + c^{*}(a+b)(a+c)^{*}b) & \( c^{*}(a+b)(a+c)^{*}b\) \\
+			\(R_{13}^2 \) & \( \emptyset + c^{*}(a+b)(a+c)^{*}b\) & \( c^{*}(a+b)(a+c)^{*}b\) \\
 			\(R_{21}^2 \) & \( \emptyset +  (a+c)^{*} \emptyset\) & \(\emptyset\) \\
 			\(R_{22}^2 \) & \( (a+c) + (a+c)^{*}\) & \((a+c)^{*}\) \\
 			\(R_{23}^2 \) & \(  b + (a+c)^{*}b\) & \( (a+c)^{*}b\)     \\
@@ -470,7 +470,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 			\hline
 		\end{tabular}
 	\item \(k = 3\)
-		\begin{tabular}[l|c|r]
+		\begin{tabular}{l|c|r}
 			& direktes Einfügen & vereinfacht \\
 			\hline \hline
 			\(R_{13}^3 \) & \( (c^{*}(a+b)(a+c)^{*}b) + c^{*}(a+b)(a+c)^{*}b(a+b)^{*}  \) & \(c^{*}(a+b)								(a+c)^{*}b(a+b)^{*}\) \\
