@@ -211,7 +211,210 @@
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
+Wir wollen einen Automaten zu \(E = (0+11)^{*}0 \) erstellen. \\
+Dazu gehen wir Schritt für Schritt vor. \\
+\begin{enumerate}[-]
+
+\item \( (11) \)
+	Wir haben: \\
 	
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  		\tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  		\node[initial,state]	(A)						{$q_0$};
+  		\node[state, accepting]			(B) [right of=A]		{$q_1$};
+  	
+  		\path 
+			(A) edge  				node {1} 		(B)
+			;
+		\end{tikzpicture} 
+	\end{center}
+	
+	Diesen einfachen Automaten können wir wie folgt konkatenieren. \\
+
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  		\tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  		\node[initial,state]	(A)						{$q_0$};
+  		\node[state]			(B) [right of=A]		{$q_1$};
+		\node[state]			(C) [right of=B]		{$q_2$};
+		\node[state,accepting]	(D) [right of=C]		{$q_3$};
+  	
+  		\path 
+			(A) edge  				node {1} 		(B)
+			(B) edge				node {$\epsilon$}	(C)
+			(C) edge				node {1}		(D)
+			;
+		\end{tikzpicture} 
+	\end{center}
+
+\item \( (0+11) \)
+	Wir haben: \\
+
+	begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  		\tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  		\node[initial,state]	(A)						{$q_0$};
+  		\node[state, accepting]			(B) [right of=A]		{$q_1$};
+  	
+  		\path 
+			(A) edge  				node {0} 		(B)
+			;
+		\end{tikzpicture} 
+	\end{center}
+
+	Diesen Automaten können wir mit dem vorherigen vereinigen: \\
+
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  		\tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  		\node[initial,state]		(A)					{$q_0$};
+  		\node[state]			(B) [right of=A]		{$q_1$};
+  		\node[state]			(C) [right of=B]		{$q_2$};
+  		\node[state]			(D) [right of=C]		{$q_3$};
+ 		\node[state]			(E) [right of=D]		{$q_4$};
+  		\node[state,accepting]	(F) [right of=E]		{$q_5$}; 
+		\node[state] 			(G)[below=B]			{$q_6$};
+		\node[state] 			(H)[right of=G]		{$q_7$};   
+    
+  		\path (A) edge  			node {$\epsilon$}		(B)
+			(A) edge  				node {$\epsilon$} 		(G)
+			(B) edge  				node {1} 				(C)
+			(C) edge  				node {$\epsilon$} 		(D)
+			(D) edge  				node {1} 				(E)
+			(E) edge 				node {$\epsilon$} 		(F)
+			(G) edge  				node {0} 				(H)
+			(H) edge  				node {$\epsilon$} 		(F)
+			;
+  
+		\end{tikzpicture} 
+	\end{center}
+\item \( (0+11)^{*} \)
+	Fancy text to be added: \\
+
+	
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  		\tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  		\node[initial,state]		(A)					{$q_0$};
+  		\node[state]			(B) [right of=A]		{$q_1$};
+  		\node[state]			(C) [right of=B]		{$q_2$};
+  		\node[state]			(D) [right of=C]		{$q_3$};
+ 		\node[state]			(E) [right of=D]		{$q_4$};
+  		\node[state]			(F) [right of=E]		{$q_5$};
+		\node[state]			(G) [right of=F]		{$q_6$};
+		\node[state,accepting]	(H) [right of=G]		{$q_7$};
+		\node[state] 			(I) [below=B]			{$q_8$};
+		\node[state] 			(J) [right of=I]		{$q_9$};   
+    
+  		\path (A) edge				node {$\epsilon$}		(B)
+			(B) edge  				node {$\epsilon$}		(C)
+			(B) edge  				node {$\epsilon$} 		(I)
+			(C) edge  				node {1} 				(D)
+			(D) edge  				node {$\epsilon$} 		(E)
+			(E) edge  				node {1} 				(F)
+			(F) edge 				node {$\epsilon$} 		(G)
+			(G) edge  				node {$\epsilon$} 		(H)
+			(I) edge  				node {0} 				(J)
+			(J) edge				node {$\epsilon$}		(G)
+			;
+  
+		\end{tikzpicture} 
+	\end{center}
+	
+\item \( (0+11)^{*}0 \)
+	Jetzt müssen wir den Automaten nur noch mit dem "Hilfs"-Automaten aus dem zweiten Schritt 					konkatenieren. \\
+
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  		\tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  		\node[initial,state]		(A)					{$q_0$};
+  		\node[state]			(B) [right of=A]		{$q_1$};
+  		\node[state]			(C) [right of=B]		{$q_2$};
+  		\node[state]			(D) [right of=C]		{$q_3$};
+ 		\node[state]			(E) [right of=D]		{$q_4$};
+  		\node[state]			(F) [right of=E]		{$q_5$};
+		\node[state]			(G) [right of=F]		{$q_6$};
+		\node[state]			(H) [right of=G]		{$q_7$};
+		\node[state] 			(I) [below=B]			{$q_8$};
+		\node[state] 			(J) [right of=I]			{$q_9$};   
+		\node[state,accepting]	(K) [right of=H]		{$q_{10}$};
+    
+  		\path (A) edge				node {$\epsilon$}		(B)
+			(B) edge  				node {$\epsilon$}		(C)
+			(B) edge  				node {$\epsilon$} 		(I)
+			(C) edge  				node {1} 				(D)
+			(D) edge  				node {$\epsilon$} 		(E)
+			(E) edge  				node {1} 				(F)
+			(F) edge 				node {$\epsilon$} 		(G)
+			(G) edge  				node {$\epsilon$} 		(H)
+			(I) edge  				node {0} 				(J)
+			(J) edge				node {$\epsilon$}		(G)
+			(H) edge				node {0}				(K)
+			;
+  
+		\end{tikzpicture} 
+	\end{center}
+	
+	Somit haben wir einen $\epsilon$-NEA erhalten, welchen wir zu einem NEA umformen können, indem wir auf 	die $\epsilon$-Kanten verzichten. \\
+
+\item NEA
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  		\tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  		\node[state,initial]		(B) 					{$q_1$};
+  		\node[state]			(D) [right of =B]		{$q_3$};
+		\node[state]			(G) [right of=D]		{$q_6$}; 
+		\node[state,accepting]	(K) [right of=G]		{$q_{10}$};
+    
+  		\path 
+			(B) edge  				node {1}				(D)
+			(B) edge 				node {0}				(G)
+			(D) edge  				node {1} 				(G)
+			(G) edge  				node {0} 				(G)
+			(G) edge				node {0}				(K)
+			(G) edge				node {1}				(D)
+			;
+  
+		\end{tikzpicture} 
+	\end{center}
+	
+	Nun können wir mit etwas Übersicht den NEA zu einem EA umformen. \\
+\item EA
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  		\tikzstyle{every state}=[fill=none,draw=black,text=black]
+  
+  		\node[state,initial]		(B) 					{$q_1$};
+  		\node[state]			(D) [right of =B]		{$q_3$};
+		\node[state]			(F) [right of=D]		{$q_5$}; 
+		\node[state,accepting]	(G) [below right of=B]	{$q_6$};
+		\node[state]			(M)[below G]			{Müll};
+    
+  		\path 
+			(B) edge  				node {1}				(D)
+			(B) edge 				node {0}				(G)
+			(D) edge  				node {1} 				(F)
+			(D) edge				node {0}				(M)
+			(F) edge				node {1}				(D)
+			(F) edge 				node {0}				(G)
+			(G) edge  				node {0} 				(G)
+			(G) edge				node {1}				(D)
+			(M) edge 				node {0}				(M)
+			(M) edge				node {1}				(M)
+			;
+  
+		\end{tikzpicture} 
+	\end{center}
+	
+\end{enumerate}
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
