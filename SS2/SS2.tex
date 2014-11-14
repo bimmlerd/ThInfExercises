@@ -213,11 +213,9 @@
 \begin{homeworkProblem}
 Wir wollen einen Automaten zu \(E = (0+11)^{*}0 \) erstellen. \\
 Dazu gehen wir Schritt für Schritt vor. \\
-\begin{enumerate}[-]
+\begin{enumerate}
 
-\item \( (11) \)
-	Wir haben: \\
-	
+\item Für \( (11) \) können wir leicht den folgenden EA konkatenieren:
 	\begin{center}
 		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
@@ -231,7 +229,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 		\end{tikzpicture} 
 	\end{center}
 	
-	Diesen einfachen Automaten können wir wie folgt konkatenieren. \\
+	Konkatenation:
 
 	\begin{center}
 		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
@@ -250,8 +248,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 		\end{tikzpicture} 
 	\end{center}
 
-\item \( (0+11) \)
-	Wir haben: \\
+\item Für \( (0+11) \) vereinigen wir einfach den folgenden und den vorherigen EA:
 
 	\begin{center}
 		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
@@ -266,10 +263,10 @@ Dazu gehen wir Schritt für Schritt vor. \\
 		\end{tikzpicture} 
 	\end{center}
 
-	Diesen Automaten können wir mit dem vorherigen vereinigen: \\
+	Vereinigung:
 
 	\begin{center}
-		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
   
   		\node[initial,state]		(A)					{$q_0$};
@@ -293,16 +290,14 @@ Dazu gehen wir Schritt für Schritt vor. \\
   
 		\end{tikzpicture} 
 	\end{center}
-\item \( (0+11)^{*} \)
-	Fancy text to be added: \\
+\item Für \( (0+11)^{*} \) muss jetzt sichergestellt werden, dass die Wiederholung ebenfalls akzeptiert wird, und als Spezialfall der Wiederholung das leere Wort.
 
-	
 	\begin{center}
-		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
   
   		\node[initial,state]		(A)					{$q_0$};
-  		\node[state]			(B) [right of=A]		{$q_1$};
+  		\node[state,accepting]			(B) [right of=A]		{$q_1$};
   		\node[state]			(C) [right of=B]		{$q_2$};
   		\node[state]			(D) [right of=C]		{$q_3$};
  		\node[state]			(E) [right of=D]		{$q_4$};
@@ -322,16 +317,17 @@ Dazu gehen wir Schritt für Schritt vor. \\
 			(G) edge  				node {$\epsilon$} 		(H)
 			(I) edge  				node {0} 				(J)
 			(J) edge				node {$\epsilon$}		(G)
+			(G) edge [bend right]	node[above] {$\epsilon$}		(B)
 			;
   
 		\end{tikzpicture} 
 	\end{center}
 	
 \item \( (0+11)^{*}0 \)
-	Jetzt müssen wir den Automaten nur noch mit dem "Hilfs"-Automaten aus dem zweiten Schritt 					konkatenieren. \\
+	Jetzt müssen wir den Automaten nur noch mit dem ``Hilfs''-Automaten aus dem zweiten Schritt 					konkatenieren. \\
 
 	\begin{center}
-		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.9cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
   
   		\node[initial,state]		(A)					{$q_0$};
@@ -366,7 +362,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 
 \item NEA
 	\begin{center}
-		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
   
   		\node[state,initial]		(B) 					{$q_1$};
