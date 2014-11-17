@@ -172,7 +172,7 @@
 \newcommand{\hmwkTitle}{Selbststudium\ 2} % Assignment title
 \newcommand{\hmwkDueDate}{21.\ November\ 2014} % Due date
 \newcommand{\hmwkClass}{Theoretische Infomatik} % Course/class
-\newcommand{\hmwkClassInstructor}{Prof. Hromkovič, Prof. Welzl} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Prof. Welzl} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{Vincent von Rotz, David Bimmler und Kevin Klein} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -211,11 +211,10 @@
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-Wir wollen einen Automaten zu \(E = (0+11)^{*}0 \) erstellen. \\
-Dazu gehen wir Schritt für Schritt vor. \\
+Wir wollen einen Automaten zu \(E = (0+11)^{*}0 \) erstellen. Dazu gehen wir Schritt für Schritt vor.
 \begin{enumerate}
 
-\item Für \( (11) \) können wir leicht den folgenden EA konkatenieren:
+\item Für \( (11) \) können wir leicht den folgenden EA zu sich selbst konkatenieren:
 	\begin{center}
 		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
@@ -440,7 +439,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-	Wir suchen \( R_{13}^3 \cup R_{11}^3 \). Es ist offensichtlich, dass:  \\
+	Wir suchen \( R_{13}^3 \cup R_{11}^3 \). Es ist offensichtlich, dass: 
 	\begin{center}
 	\begin{tabular}{|r|l|}
 		\hline
@@ -456,11 +455,12 @@ Dazu gehen wir Schritt für Schritt vor. \\
 		\hline
 	\end{tabular}
 	\end{center}
-	Mit Hilfe der Formel \( R_{ij} = R_{ij}^{k-1} + R_{ik}(R_{kk})^{*}R_{kj} \) können wir nun \(R_{13}^{(k)} \) für 				aufsteigende k berechnen.\\
+	Mit Hilfe der Formel \( R_{ij} = R_{ij}^{k-1} + R_{ik}(R_{kk})^{*}R_{kj} \) können wir nun \(R_{13}^{(k)} \) für 				aufsteigende $k$ berechnen.
 	\begin{enumerate}[•]
 	\item \(k = 1\)
 		\begin{center}
 		\begin{tabular}{|l|l|l|}
+			\hline
 			& direktes Einfügen & vereinfacht \\
 			\hline 
 			\(R_{11}^1 \) & \(c + cc^{*}c \) & \( c^{*} \) \\
@@ -478,6 +478,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 	\item \(k = 2\)
 		\begin{center}
 		\begin {tabular}{|l|l|l|}
+			\hline 
 			& direktes Einfügen & vereinfacht \\
 			\hline 
 			\(R_{11}^2 \) & \(c^{*} + c^{*}(a+b)(a+c)^{*} \emptyset \) & \( c^{*} \) \\
@@ -495,10 +496,11 @@ Dazu gehen wir Schritt für Schritt vor. \\
 	\item \(k = 3\)
 		\begin{center}
 		\begin{tabular}{|l|l|l|}
+			\hline
 			& direktes Einfügen & vereinfacht \\
 			\hline
 			$R_{11}^3$ & $c^* + c^*(a + b)(a + c)^*b ( (a + b) + c (a + c)^{*}b )^* \emptyset$ & $c^*$\\
-			\(R_{13}^3 \) & \( (c^{*}(a+b)(a+c)^{*}b) + c^{*}(a + b)(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}  \) & \(c^{*}(a + b)								(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}\) \\
+			\(R_{13}^3 \) & \( (c^{*}(a+b)(a+c)^{*}b) + c^{*}(a + b)(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}  \) & \(c^{*}(a + b)(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}\) \\
 			\hline
 		\end{tabular}
 		\end{center}
