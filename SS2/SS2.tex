@@ -439,8 +439,9 @@ Dazu gehen wir Schritt für Schritt vor. \\
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-	Wir suchen \( \bigcup_{k \in {0,1,2,3}} R_{13}^k \) \\
+	Wir suchen \( R_{13}^3 \cup R_{11}^3 \) \\
 	Es ist offensichtlich, dass:  \\
+	\begin{center}
 	\begin{tabular}{|r|l|}
 		\hline
 		\(R_{11}^0 \) & \(c\) \\
@@ -454,9 +455,12 @@ Dazu gehen wir Schritt für Schritt vor. \\
 		\(R_{33}^0 \) & \( a +b \) \\
 		\hline
 	\end{tabular}
-	Mit Hilfe der Formel \( R_{ij} = R_{ij}^{k-1} + R_{ik}(R_{kk})^{*}R_{kj} \) können wir nun \(R_{13}^(k) \) für 				aufsteigende k berechnen.\\
+	\end{center}
+	Mit Hilfe der Formel \( R_{ij} = R_{ij}^{k-1} + R_{ik}(R_{kk})^{*}R_{kj} \) können wir nun \(R_{13}^{(k)} \) für 				aufsteigende k berechnen.\\
 	\begin{enumerate}[-]
 	\item \(k = 1\)
+	\\
+		\begin{center}
 		\begin{tabular}{|l|c|r|}
 			& direktes Einfügen & vereinfacht \\
 			\hline \hline
@@ -464,14 +468,17 @@ Dazu gehen wir Schritt für Schritt vor. \\
 			\(R_{12}^1 \) & \( (a + b) + c^{*} (a + b) \) & \(c^{*}(a+b) \) \\
 			\(R_{13}^1 \) & \( \emptyset + cc^{*} \emptyset\) & \( \emptyset\) \\
 			\(R_{21}^1 \) & \( \emptyset +  \emptyset c^{*}(a+b)\) & \(\emptyset\) \\
-			\(R_{22}^1 \) & \( (a+c) + \emptyset c^{*} (a+b)\) & \(a+\centering\) \\
+			\(R_{22}^1 \) & \( (a+c) + \emptyset c^{*} (a+b)\) & \(a+c\) \\
 			\(R_{23}^1 \) & \(  b + \emptyset c{*}(a+b)\) & \( b\)     \\
 			\(R_{31}^1 \) & \( \emptyset + \emptyset c{*}\) & \( \emptyset\) \\
 			\(R_{32}^1 \) & \( c + \emptyset c{*} (a+b)\) & \( c \)  \\
-			\(R_{33}^1 \) & \( (a +b) + \emptyset c{*} \emptyset \) & \( a + b \) \\
+			\(R_{33}^1 \) & \( (a + b) + \emptyset c{*} \emptyset \) & \( a + b \) \\
 			\hline
 		\end{tabular}
+		\end{center}
 	\item \(k = 2\)
+	\\
+		\begin{center}
 		\begin {tabular}{|l|c|r|}
 			& direktes Einfügen & vereinfacht \\
 			\hline \hline
@@ -483,16 +490,26 @@ Dazu gehen wir Schritt für Schritt vor. \\
 			\(R_{23}^2 \) & \(  b + (a+c)^{*}b\) & \( (a+c)^{*}b\)     \\
 			\(R_{31}^2 \) & \( \emptyset + \emptyset (a+c)^{*} \emptyset\) & \( \emptyset\) \\
 			\(R_{32}^2 \) & \( c + c(a+c)^{*} \) & \( c(a+c)^{*} \)  \\
-			\(R_{33}^2 \) & \( (a +b) + \emptyset (a+c)^{*}b \) & \( a + b \) \\
+			\(R_{33}^2 \) & \( (a + b) + c (a+c)^{*}b \) & \( (a +b) + c (a+c)^{*}b \) \\
 			\hline
 		\end{tabular}
+		\end{center}
 	\item \(k = 3\)
-		\begin{tabular}{l|c|r}
+	\\
+		\begin{center}
+		\begin{tabular}{|l|c|c|}
 			& direktes Einfügen & vereinfacht \\
 			\hline \hline
-			\(R_{13}^3 \) & \( (c^{*}(a+b)(a+c)^{*}b) + c^{*}(a+b)(a+c)^{*}b(a+b)^{*}  \) & \(c^{*}(a+b)								(a+c)^{*}b(a+b)^{*}\) \\
+			$R_{11}^3$ & $c^* + c^*(a + b)(a + c)^*b ( (a + b) + c (a + c)^{*}b )^* \emptyset$ & $c^*$\\
+			\(R_{13}^3 \) & \( (c^{*}(a+b)(a+c)^{*}b) + c^{*}(a + b)(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}  \) & \(c^{*}(a + b)								(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}\) \\
 			\hline
 		\end{tabular}
+		\end{center}
+	Unser regulärer Ausdruck ist nun die Union der beiden Ausdrücke:
+	\begin{equation*}
+		A=R_{11}^3 + R_{13}^k = c^* + c^{*}(a + b)(a + c)^{*}b( (a + b) + c (a + c)^{*}b )^{*}
+	\end{equation*}
+	
 	\end{enumerate}
 \end{homeworkProblem}
 
