@@ -443,19 +443,19 @@ Wir wollen einen Automaten zu \(E = (0+11)^{*}0 \) erstellen. Dazu gehen wir Sch
 	\begin{center}
 	\begin{tabular}{|r|l|}
 		\hline
-		\(R_{11}^0 \) & \(c\) \\
+		\(R_{11}^0 \) & \(c + \lambda\) \\
 		\(R_{12}^0 \) & \(a + b\) \\
 		\(R_{13}^0 \) & \( \emptyset\) \\
 		\(R_{21}^0 \) & \( \emptyset\) \\
-		\(R_{22}^0 \) & \( a + c\) \\
+		\(R_{22}^0 \) & \( a + c + \lambda \) \\
 		\(R_{23}^0 \) & \( b\) \\
 		\(R_{31}^0 \) & \( \emptyset\) \\
 		\(R_{32}^0 \) & \( c\) \\
-		\(R_{33}^0 \) & \( a +b \) \\
+		\(R_{33}^0 \) & \(a + b + \lambda \) \\
 		\hline
 	\end{tabular}
 	\end{center}
-	Mit Hilfe der Formel \( R_{ij} = R_{ij}^{k-1} + R_{ik}(R_{kk})^{*}R_{kj} \) können wir nun \(R_{13}^{(k)} \) für 				aufsteigende $k$ berechnen.
+	Mit Hilfe der Formel \( R_{ij} = R_{ij}^{k-1} + R_{ik}^{k-1}(R_{kk}^{k-1})^{*}R_{kj}^{k-1} \) können wir nun \(R_{13}^{(k)} \) für 				aufsteigende $k$ berechnen.\\
 	\begin{enumerate}[•]
 	\item \(k = 1\)
 		\begin{center}
@@ -463,15 +463,15 @@ Wir wollen einen Automaten zu \(E = (0+11)^{*}0 \) erstellen. Dazu gehen wir Sch
 			\hline
 			& direktes Einfügen & vereinfacht \\
 			\hline 
-			\(R_{11}^1 \) & \(c + cc^{*}c \) & \( c^{*} \) \\
-			\(R_{12}^1 \) & \( (a + b) + c^{*} (a + b) \) & \(c^{*}(a+b) \) \\
+			\(R_{11}^1 \) & \((c + \lambda) + (c + \lambda )(c + \lambda)^{*}(c + \lambda) \) & \( c^{*} \) \\
+			\(R_{12}^1 \) & \( (a + b) + (c + \lambda )(c + \lambda)^{*} (a + b) \) & \(c^{*}(a+b) \) \\
 			\(R_{13}^1 \) & \( \emptyset + cc^{*} \emptyset\) & \( \emptyset\) \\
 			\(R_{21}^1 \) & \( \emptyset +  \emptyset c^{*}(a+b)\) & \(\emptyset\) \\
-			\(R_{22}^1 \) & \( (a+c) + \emptyset c^{*} (a+b)\) & \(a+c\) \\
+			\(R_{22}^1 \) & \( (a + c + \lambda ) + \emptyset c^{*} (a+b)\) & \( a+c + \lambda \) \\
 			\(R_{23}^1 \) & \(  b + \emptyset c{*}(a+b)\) & \( b\)     \\
 			\(R_{31}^1 \) & \( \emptyset + \emptyset c^{*}\) & \( \emptyset\) \\
 			\(R_{32}^1 \) & \( c + \emptyset c^{*} (a+b)\) & \( c \)  \\
-			\(R_{33}^1 \) & \( (a + b) + \emptyset c^{*} \emptyset \) & \( a + b \) \\
+			\(R_{33}^1 \) & \( ( a + b + \lambda) + \emptyset c^{*} \emptyset \) & \( a + b + \lambda \) \\
 			\hline
 		\end{tabular}
 		\end{center}
@@ -481,26 +481,26 @@ Wir wollen einen Automaten zu \(E = (0+11)^{*}0 \) erstellen. Dazu gehen wir Sch
 			\hline 
 			& direktes Einfügen & vereinfacht \\
 			\hline 
-			\(R_{11}^2 \) & \(c^{*} + c^{*}(a+b)(a+c)^{*} \emptyset \) & \( c^{*} \) \\
-			\(R_{12}^2 \) & \( c^{*}(a + b) + c^{*} (a + b)(a+c)^{*} \) & \(c^{*}(a+b)(a+c)^{*} \) \\
-			\(R_{13}^2 \) & \( \emptyset + c^{*}(a+b)(a+c)^{*}b\) & \( c^{*}(a+b)(a+c)^{*}b\) \\
+			\(R_{11}^2 \) & \(c^{*} + c^{*}(a+b)(a+c + \lambda)^{*} \emptyset \) & \( c^{*} \) \\
+			\(R_{12}^2 \) & \( c^{*}(a + b) + c^{*} (a + b)(a+c + \lambda)^{*}(a+c+\lambda) \) & \(c^{*}(a+b)(a+c)^{*} \) \\
+			\(R_{13}^2 \) & \( \emptyset + c^{*}(a+b)(a+c+\lambda)^{*}b\) & \( c^{*}(a+b)(a+c)^{*}b\) \\
 			\(R_{21}^2 \) & \( \emptyset +  (a+c)^{*} \emptyset\) & \(\emptyset\) \\
 			\(R_{22}^2 \) & \( (a+c) + (a+c)^{*}\) & \((a+c)^{*}\) \\
 			\(R_{23}^2 \) & \(  b + (a+c)^{*}b\) & \( (a+c)^{*}b\)     \\
 			\(R_{31}^2 \) & \( \emptyset + \emptyset (a+c)^{*} \emptyset\) & \( \emptyset\) \\
-			\(R_{32}^2 \) & \( c + c(a+c)^{*} \) & \( c(a+c)^{*} \)  \\
-			\(R_{33}^2 \) & \( (a + b) + c (a+c)^{*}b \) & \( (a +b) + c (a+c)^{*}b \) \\
+			\(R_{32}^2 \) & \( c + c(a+c+\lambda)^{*}(a + c + \lambda) \) & \( c(a+c)^{*} \)  \\
+			\(R_{33}^2 \) & \( (a + b + \lambda) + c (a+c)^{*}b \) & \( (a + b + \lambda) + c (a+c)^{*}b \) \\
 			\hline
 		\end{tabular}
 		\end{center}
 	\item \(k = 3\)
 		\begin{center}
-		\begin{tabular}{|l|l|l|}
+		\begin{tabular}{| l | p{8cm} | l |}
 			\hline
 			& direktes Einfügen & vereinfacht \\
 			\hline
 			$R_{11}^3$ & $c^* + c^*(a + b)(a + c)^*b ( (a + b) + c (a + c)^{*}b )^* \emptyset$ & $c^*$\\
-			\(R_{13}^3 \) & \( (c^{*}(a+b)(a+c)^{*}b) + c^{*}(a + b)(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}  \) & \(c^{*}(a + b)(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}\) \\
+			\(R_{13}^3 \) & \( (c^{*}(a+b)(a+c)^{*}b) + c^{*}(a + b)(a + c)^{*}b( (a + b + \lambda) + c (a+c)^{*}b )^{*}  \) & \(c^{*}(a + b)(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}\) \\
 			\hline
 		\end{tabular}
 		\end{center}
