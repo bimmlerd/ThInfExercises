@@ -393,9 +393,9 @@ Wir wollen einen Automaten zu \(E = (0+11)^{*}0 \) erstellen. Dazu gehen wir Sch
 		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
 			
-			\node[state,initial]	(A)						{$q_0$};
-			\node[state]			(B)	[right of=A]		{$q_1$};
-			\node[state]			(C)	[below right of=A]	{$q_2$};
+			\node[state,initial]				(A)					{$q_0$};
+			\node[state]					(B)	[right of=A]		{$q_1$};
+			\node[state,accepting]			(C)	[below right of=A]	{$q_2$};
 			
 			\path
 			(A) edge [loop below]	node {0}		(A)
