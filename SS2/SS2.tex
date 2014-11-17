@@ -430,6 +430,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 		  
 		\end{tikzpicture} 
 	\end{center}
+	\clearpage
 	
 \end{enumerate}
 \end{homeworkProblem}
@@ -439,8 +440,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-	Wir suchen \( R_{13}^3 \cup R_{11}^3 \) \\
-	Es ist offensichtlich, dass:  \\
+	Wir suchen \( R_{13}^3 \cup R_{11}^3 \). Es ist offensichtlich, dass:  \\
 	\begin{center}
 	\begin{tabular}{|r|l|}
 		\hline
@@ -457,31 +457,29 @@ Dazu gehen wir Schritt für Schritt vor. \\
 	\end{tabular}
 	\end{center}
 	Mit Hilfe der Formel \( R_{ij} = R_{ij}^{k-1} + R_{ik}(R_{kk})^{*}R_{kj} \) können wir nun \(R_{13}^{(k)} \) für 				aufsteigende k berechnen.\\
-	\begin{enumerate}[-]
+	\begin{enumerate}[•]
 	\item \(k = 1\)
-	\\
 		\begin{center}
-		\begin{tabular}{|l|c|r|}
+		\begin{tabular}{|l|l|l|}
 			& direktes Einfügen & vereinfacht \\
-			\hline \hline
+			\hline 
 			\(R_{11}^1 \) & \(c + cc^{*}c \) & \( c^{*} \) \\
 			\(R_{12}^1 \) & \( (a + b) + c^{*} (a + b) \) & \(c^{*}(a+b) \) \\
 			\(R_{13}^1 \) & \( \emptyset + cc^{*} \emptyset\) & \( \emptyset\) \\
 			\(R_{21}^1 \) & \( \emptyset +  \emptyset c^{*}(a+b)\) & \(\emptyset\) \\
 			\(R_{22}^1 \) & \( (a+c) + \emptyset c^{*} (a+b)\) & \(a+c\) \\
 			\(R_{23}^1 \) & \(  b + \emptyset c{*}(a+b)\) & \( b\)     \\
-			\(R_{31}^1 \) & \( \emptyset + \emptyset c{*}\) & \( \emptyset\) \\
-			\(R_{32}^1 \) & \( c + \emptyset c{*} (a+b)\) & \( c \)  \\
-			\(R_{33}^1 \) & \( (a + b) + \emptyset c{*} \emptyset \) & \( a + b \) \\
+			\(R_{31}^1 \) & \( \emptyset + \emptyset c^{*}\) & \( \emptyset\) \\
+			\(R_{32}^1 \) & \( c + \emptyset c^{*} (a+b)\) & \( c \)  \\
+			\(R_{33}^1 \) & \( (a + b) + \emptyset c^{*} \emptyset \) & \( a + b \) \\
 			\hline
 		\end{tabular}
 		\end{center}
 	\item \(k = 2\)
-	\\
 		\begin{center}
-		\begin {tabular}{|l|c|r|}
+		\begin {tabular}{|l|l|l|}
 			& direktes Einfügen & vereinfacht \\
-			\hline \hline
+			\hline 
 			\(R_{11}^2 \) & \(c^{*} + c^{*}(a+b)(a+c)^{*} \emptyset \) & \( c^{*} \) \\
 			\(R_{12}^2 \) & \( c^{*}(a + b) + c^{*} (a + b)(a+c)^{*} \) & \(c^{*}(a+b)(a+c)^{*} \) \\
 			\(R_{13}^2 \) & \( \emptyset + c^{*}(a+b)(a+c)^{*}b\) & \( c^{*}(a+b)(a+c)^{*}b\) \\
@@ -495,11 +493,10 @@ Dazu gehen wir Schritt für Schritt vor. \\
 		\end{tabular}
 		\end{center}
 	\item \(k = 3\)
-	\\
 		\begin{center}
-		\begin{tabular}{|l|c|c|}
+		\begin{tabular}{|l|l|l|}
 			& direktes Einfügen & vereinfacht \\
-			\hline \hline
+			\hline
 			$R_{11}^3$ & $c^* + c^*(a + b)(a + c)^*b ( (a + b) + c (a + c)^{*}b )^* \emptyset$ & $c^*$\\
 			\(R_{13}^3 \) & \( (c^{*}(a+b)(a+c)^{*}b) + c^{*}(a + b)(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}  \) & \(c^{*}(a + b)								(a + c)^{*}b( (a +b) + c (a+c)^{*}b )^{*}\) \\
 			\hline
