@@ -201,7 +201,7 @@
 
 %\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
 
-\addtocounter{homeworkProblemCounter}{4}
+\addtocounter{homeworkProblemCounter}{3}
 \newpage
 %\tableofcontents
 %\newpage
@@ -297,7 +297,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
   
   		\node[initial,state]		(A)					{$q_0$};
-  		\node[state,accepting]			(B) [right of=A]		{$q_1$};
+  		\node[state]			(B) [right of=A]		{$q_1$};
   		\node[state]			(C) [right of=B]		{$q_2$};
   		\node[state]			(D) [right of=C]		{$q_3$};
  		\node[state]			(E) [right of=D]		{$q_4$};
@@ -308,6 +308,7 @@ Dazu gehen wir Schritt für Schritt vor. \\
 		\node[state] 			(J) [right of=I]		{$q_9$};   
     
   		\path (A) edge				node {$\epsilon$}		(B)
+			(A) edge [bend left]	node {$\epsilon$}		(H)
 			(B) edge  				node {$\epsilon$}		(C)
 			(B) edge  				node {$\epsilon$} 		(I)
 			(C) edge  				node {1} 				(D)
@@ -326,8 +327,8 @@ Dazu gehen wir Schritt für Schritt vor. \\
 \item \( (0+11)^{*}0 \)
 	Jetzt müssen wir den Automaten nur noch mit dem ``Hilfs''-Automaten aus dem zweiten Schritt 					konkatenieren. \\
 
-	\begin{center}
-		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.9cm, semithick]
+\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
   
   		\node[initial,state]		(A)					{$q_0$};
@@ -338,75 +339,95 @@ Dazu gehen wir Schritt für Schritt vor. \\
   		\node[state]			(F) [right of=E]		{$q_5$};
 		\node[state]			(G) [right of=F]		{$q_6$};
 		\node[state]			(H) [right of=G]		{$q_7$};
-		\node[state] 			(I) [below of=B]		{$q_8$};
-		\node[state] 			(J) [right of=I]			{$q_9$};   
-		\node[state,accepting]	(K) [right of=H]		{$q_{10}$};
+		\node[state,accepting]	(I) [right of=H]		{$q_8$};  
+		\node[state] 			(J) [below of=B]		{$q_9$};
+		\node[state] 			(K) [right of=J]		{$q_{10}$};
+ 
     
   		\path (A) edge				node {$\epsilon$}		(B)
+			(A) edge [bend left]	node {$\epsilon$}		(H)
 			(B) edge  				node {$\epsilon$}		(C)
-			(B) edge  				node {$\epsilon$} 		(I)
+			(B) edge  				node {$\epsilon$} 		(J)
 			(C) edge  				node {1} 				(D)
 			(D) edge  				node {$\epsilon$} 		(E)
 			(E) edge  				node {1} 				(F)
 			(F) edge 				node {$\epsilon$} 		(G)
 			(G) edge  				node {$\epsilon$} 		(H)
-			(I) edge  				node {0} 				(J)
-			(J) edge				node {$\epsilon$}		(G)
-			(H) edge				node {0}				(K)
+			(J) edge  				node {0} 				(K)
+			(K) edge				node {$\epsilon$}		(G)
+			(G) edge [bend right]	node[above] {$\epsilon$}(B)
+			(H) edge 				node {0}				(I)
 			;
   
 		\end{tikzpicture} 
 	\end{center}
 	
-	Somit haben wir einen $\epsilon$-NEA erhalten, welchen wir zu einem NEA umformen können, indem wir auf 	die $\epsilon$-Kanten verzichten. \\
-
-\item NEA
+	\item Somit haben wir einen $\epsilon$-NEA erhalten, welchen wir zu einem NEA umformen können, indem wir auf die $\epsilon$-Kanten verzichten. 
 	\begin{center}
-		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm, semithick]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
-  
-  		\node[state,initial]		(B) 					{$q_1$};
-  		\node[state]			(D) [right of =B]		{$q_3$};
-		\node[state]			(G) [right of=D]		{$q_6$}; 
-		\node[state,accepting]	(K) [right of=G]		{$q_{10}$};
-    
-  		\path 
-			(B) edge  				node {1}				(D)
-			(B) edge 				node {0}				(G)
-			(D) edge  				node {1} 				(G)
-			(G) edge  				node {0} 				(G)
-			(G) edge				node {0}				(K)
-			(G) edge				node {1}				(D)
-			;
-  
-		\end{tikzpicture} 
+			
+			\node[state,initial]	(A)						{$q_0$};
+			\node[state]			(B)	[right of=A]		{$q_1$};
+			\node[state]			(C)	[right of=B]		{$q_2$};
+			\node[state]			(D)	[below right of=A]	{$q_3$};
+			\node[state, accepting] (E)	[right of=D]		{$q_4$};
+			
+			\path
+			(A) edge				node {1}		(B)
+			(A) edge				node {0}		(D)
+			(A) edge				node {0}		(E)
+			(B) edge [bend left]	node {1}		(C)
+			(C) edge [bend left]	node {1}		(B)
+			(C) edge [bend left]	node [above] {0}(D)
+			(C) edge 				node {0}		(E)
+			(D) edge [loop below]	node {0}		(D)
+			(D) edge [bend right]	node [below ]{1}	(B)
+			(D) edge [bend right]	node [below] {0}(E)
+			;			
+			
+  		\end{tikzpicture} 
 	\end{center}
+	Dieser NEA ist ziemlich kompliziert, aber er lässt sich vereinfachen:
 	
-	Nun können wir mit etwas Übersicht den NEA zu einem EA umformen. \\
-\item EA
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  		\tikzstyle{every state}=[fill=none,draw=black,text=black]
+			
+			\node[state,initial]	(A)						{$q_0$};
+			\node[state]			(B)	[right of=A]		{$q_1$};
+			\node[state]			(C)	[below right of=A]	{$q_2$};
+			
+			\path
+			(A) edge [loop below]	node {0}		(A)
+			(A) edge [bend left]	node [below] {1}(B)
+			(A) edge 				node [below] {0}(C)
+			(B) edge [bend left]	node {1}		(A)
+			;			
+			
+  		\end{tikzpicture} 
+	\end{center}	
+	
+\item Nun können wir mit etwas Übersicht diesen NEA zu einem EA umformen.
 	\begin{center}
 		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
   		\tikzstyle{every state}=[fill=none,draw=black,text=black]
   
-  		\node[state,initial]		(B) 					{$q_1$};
-  		\node[state]			(D) [right of =B]		{$q_3$};
-		\node[state]			(F) [right of=D]		{$q_5$}; 
-		\node[state,accepting]	(G) [below right of=B]	{$q_6$};
-		\node[state]			(M) [below of=G]		{Müll};
-    
-  		\path 
-			(B) edge  				node {1}				(D)
-			(B) edge 				node {0}				(G)
-			(D) edge  				node {1} 				(F)
-			(D) edge				node {0}				(M)
-			(F) edge				node {1}				(D)
-			(F) edge 				node {0}				(G)
-			(G) edge  				node {0} 				(G)
-			(G) edge				node {1}				(D)
-			(M) edge 				node {0}				(M)
-			(M) edge				node {1}				(M)
-			;
-  
+  		\node[state, initial] 	(A) 					{$\langle q_0\rangle$};
+  		\node[state] 			(B) [right of=A]		{$\langle q_1\rangle$};
+  		\node[state,accepting] 	(C) [right of=B]		{$\langle q_0, q_2\rangle$};
+  		\node[state] 			(D) [below right of=A]	{Müll};
+		
+		\path
+		(A) edge [bend left]	node [below] {1}(B)
+		(A) edge [bend left]	node {0}		(C)
+		(B) edge [bend left]	node {1}		(A)
+		(B) edge 				node {0}		(D)
+		(C) edge 				node {1}		(B)
+		(C) edge [loop right]	node {0}		(C)
+		(D) edge [loop right]	node {0,1}		(D)
+		;
+		  
 		\end{tikzpicture} 
 	\end{center}
 	
