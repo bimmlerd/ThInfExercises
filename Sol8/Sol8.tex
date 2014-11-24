@@ -222,7 +222,22 @@
 \item Zu beweisen ist die folgende Behauptung: \[ L_1, L_2 \in \NTIME(f) \implies L_1 \cup L_2 \in \NTIME(f)\]  $ L_1, L_2 \in \NTIME(f)$ impliziert, dass zwei NTM $M_1, M_2$ mit $\Time_{M_1}$, $\Time_{M_2} \in \Oh(f(n))$ mit $L(M_1) = L_1$, $L(M_2) = L_2$ existieren. Wir definieren die Sprache $L = L_1 \cup L_2$ und eine NTM $M$. $M$ soll genau dann akzeptieren, wenn $M_1$ oder $M_2$ akzeptieren. Wir konstruieren $M$ aus $M_1$ und $M_2$, indem wir die beiden parallel simulieren. $M$ akzeptiert sobald $M_1$ oder $M_2$ akzeptieren und verwirft falls sowohl $M_1$ wie auch $M_2$ verwerfen. Dann ist $L(M) = L$.
 
 Da $\Time_{M_1}$ und $\Time_{M_2} \in \Oh(f(n))$ enthalten sind, muss auch $\Time_M \in \Oh(f(n))$ sein, da die Dauer der parallele Simulation in $\Oh(f(n))$ ist, und die restlichen Operationen der NTM $M$ nur konstante Zeit brauchen. Daraus folgt, dass $L = L(M) \in \NTIME(f)$ ist, und der Beweis ist fertig. 
-\item
+\item Zu beweisen ist die folgende Behauptung: \[L_1, L_2 \in NTIME(f) \implies L_1 - L_2 \in NTIME(f) \]
+Es gibt offensichtlich NTM \(M_1, M_2\) mit \(L(M_1) = L_1, L(M_2) = L_2\). \\
+Wir erstellen eine NTM M, die folgendermaßen operiert:
+\begin{enumerate}[1]
+\item Simuliere \(M_1\) auf der Eingabe. - \( \Oh(f) \)
+\item Falls  \(M_1\) akzeptiert: - \( \Oh(1) \)
+	\begin{enumerate}
+	\item Simuliere \(M_2\)  auf der Eingabe. - \( \Oh(f) \)
+	\item Falls \(M_2\) akzeptiert, wird die Eingabe verworfen. - \( \Oh(1) \)
+	\item Falls \(M_2\) verwirft, wird die Eingabe akzeptiert. - \( \Oh(1) \)
+	\end{enumerate} 
+\item Falls \(M_1\) nicht akzeptiert, wird die Eingabe verworfen. - \( \Oh(1) \)
+\end{enumerate}
+Es gilt offensichtlich, dass \( L(M) = L_1 - L_2 \).
+Die Schritte werden sequenziell ausgeführt, die Zeit-Komplexität von \(M\) beträgt also die Summe der einzelnen Schritte. \\
+Dementsprechend gilt \(L_1 - L_2 = L(M) \in NTIME(f) \).
 \end{enumerate}
 \end{homeworkProblem}
 %----------------------------------------------------------------------------------------
