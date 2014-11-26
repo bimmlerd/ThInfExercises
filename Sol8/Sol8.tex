@@ -255,7 +255,11 @@ Dementsprechend gilt \(L_1 - L_2 = L(M) \in \NTIME(f) \).
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-
+Wir wissen, dass für jedes Wort \(w \in L\) ein Zeuge existiert, mit \(|x| \leq \log |w|\). \\
+Daraus folgt direkt, dass es \( \sum_{i=0}^{\log |w|} 2^i = 2 \cdot |w| - 2 \) mögliche Zeugen für \(w\) gibt. 
+Des weiteren haben wir einen Polynomial-Verifizierer \(A\) für \(L\) zur Verfügung, d.h. wir können für gegebenes Wort und gegebenen Zeugen in polynomieller Zeit (polynomiell in der Länge der Eingabe(\(\Oh(|w|^n) \))) kontrollieren, ob \( w \in L\). 
+Nun können wir ausnutzen, dass das Produkt eines Polynoms mit einem Polynom wiederum ein Polynom ergibt. \\
+Für jede Eingabe \(w\) erstellt man alle \( 2 \cdot |w| -2 \) möglichen Zeugen und testet für jeden dieser Zeugen mit Hilfe von \(A\) in polynomieller Zeit, ob der jeweilige Zeuge das Wort verifiziert. Dank der genannten Eigenschaft gilt, dass dieses Prozedere ebenfalls in polynomieller Zeit ausgeführt wird.
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
