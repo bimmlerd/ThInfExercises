@@ -246,7 +246,7 @@ Dementsprechend gilt \(L_1 - L_2 = L(M) \in \NTIME(f) \).
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-
+Lässt sich wahrscheinlich mit dem Satz von Savitch was machen.
 
 \end{homeworkProblem}
 
@@ -255,7 +255,11 @@ Dementsprechend gilt \(L_1 - L_2 = L(M) \in \NTIME(f) \).
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-
+Wir wissen, dass für jedes Wort \(w \in L\) ein Zeuge existiert, mit \(|x| \leq \log |w|\). \\
+Daraus folgt direkt, dass es \( \sum_{i=0}^{\log |w|} 2^i = 2 \cdot |w| - 2 \) mögliche Zeugen für \(w\) gibt. 
+Des weiteren haben wir einen Polynomial-Verifizierer \(A\) für \(L\) zur Verfügung, d.h. wir können für gegebenes Wort und gegebenen Zeugen in polynomieller Zeit (polynomiell in der Länge der Eingabe(\(\Oh(|w|^n) \))) kontrollieren, ob \( w \in L\). 
+Nun können wir ausnutzen, dass das Produkt eines Polynoms mit einem Polynom wiederum ein Polynom ergibt. \\
+Für jede Eingabe \(w\) erstellt man alle \( 2 \cdot |w| -2 \) möglichen Zeugen und testet für jeden dieser Zeugen mit Hilfe von \(A\) in polynomieller Zeit, ob der jeweilige Zeuge das Wort verifiziert. Dank der genannten Eigenschaft gilt, dass dieses Prozedere ebenfalls in polynomieller Zeit ausgeführt wird.
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
@@ -264,6 +268,9 @@ Dementsprechend gilt \(L_1 - L_2 = L(M) \in \NTIME(f) \).
 
 \begin{homeworkProblem}
 Wir können leicht mit einer Reduktion zeigen, dass LARGE-CLIQUE NP-vollständig ist:
+%Wir betrachten zuerst die Sprache LARGE-CLIQUE. Wir beweisen, dass LARGE-CLIQUE NP-vollständig ist, indem wir beweisen, dass sie in NP und NP-schwierig ist.
+%
+%Wir nehmen als Zertifikat die Menge der Knoten, welche die LARGE-CLIQUE bilden sollen. Dann können wir in polynomieller Zeit dieses Zertifikat verifizieren, womit LARGE-CLIQUE in VP und somit auch in NP ist. Die Verifizierung von LARGE-CLIQUE stützt sich auf die bekannte (polynomielle) Verifizierung von CLIQUE, es wird nur zuerst noch geprüft, ob $k \ge \abs{V}/3$ gilt.
 \begin{equation*}
 \text{CLIQUE} \leq_P \text{LARGE-CLIQUE}
 \end{equation*}
@@ -281,6 +288,12 @@ w \in \text{CLIQUE} \Longleftrightarrow A(w) \in \text{LARGE-CLIQUE}
 Sei $w \not\in$ CLIQUE. Dann hat $w$ entweder nicht die Form $x\#y$ mit den nötigen Kodierungen, oder $x$ enthält keine Clique der Grösse $y$. Falls die Form ungültig ist, so ist $A(w)$ die Kodierung eines Graphen, welche sicher nicht in LARGE-CLIQUE enthalten ist. Falls $x$ nicht ein Graph ist mit einer clique der Grösse $y$, so hat der Graph ausgegeben von $A(w)$ auch keine clique der Grösse $k+m$, da höchstens zu einer existierenden clique m neue Knoten hinzukommen.
 
 Im Falle, dass $w \in $ CLIQUE, so erweitern wir die Clique enthalten in $x$ um $m$ Knoten, und somit enthält unser neuer Graph $A(w)$ eine Clique der grösse $k+m$ mit $k+m \geq |V'|,$ wobei $|V'|$ die Knotenmenge des neuen Graphen ist. Somit ist $w\in$ LARGE-CLIQUE.
+
+
+Nun betrachten wir noch die zweite Sprache, VERY-LARGE-CLIQUE. Wir beweisen, dass VERY-LARGE-CLIQUE in P ist, indem wir eine deterministische Turingmaschine vorschlagen, welche die Sprache akzeptiert.
+
+Die Turingmaschine verifiziert zunächst die Eingabe $(G,k)$: Falls $G$ kein Graph kodiert oder $k$ die Bedingungen der Sprache nicht erfüllt, wird verworfen. 
+
 \end{homeworkProblem}
 
 %---------------------------------------------------------------------------------------- 
