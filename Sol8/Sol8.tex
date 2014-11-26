@@ -246,7 +246,7 @@ Dementsprechend gilt \(L_1 - L_2 = L(M) \in \NTIME(f) \).
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-
+Lässt sich wahrscheinlich mit dem Satz von Savitch was machen.
 
 \end{homeworkProblem}
 
@@ -267,6 +267,18 @@ Für jede Eingabe \(w\) erstellt man alle \( 2 \cdot |w| -2 \) möglichen Zeugen
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
+
+Wir betrachten zuerst die Sprache LARGE-CLIQUE. Wir beweisen, dass LARGE-CLIQUE NP-vollständig ist, indem wir beweisen, dass sie in NP und NP-schwierig ist.
+
+Wir nehmen als Zertifikat die Menge der Knoten, welche die LARGE-CLIQUE bilden sollen. Dann können wir in polynomieller Zeit dieses Zertifikat verifizieren, womit LARGE-CLIQUE in VP und somit auch in NP ist. Die Verifizierung von LARGE-CLIQUE stützt sich auf die bekannte (polynomielle) Verifizierung von CLIQUE, es wird nur zuerst noch geprüft, ob $k \ge \abs{V}/3$ gilt.
+
+
+%% Reduction here biatch ;D
+
+\par
+Nun betrachten wir noch die zweite Sprache, VERY-LARGE-CLIQUE. Wir beweisen, dass VERY-LARGE-CLIQUE in P ist, indem wir eine deterministische Turingmaschine vorschlagen, welche die Sprache akzeptiert.
+
+Die Turingmaschine verifiziert zunächst die Eingabe $(G,k)$: Falls $G$ kein Graph kodiert oder $k$ die Bedingungen der Sprache nicht erfüllt, wird verworfen. 
 
 \end{homeworkProblem}
 
