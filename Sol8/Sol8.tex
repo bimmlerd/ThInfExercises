@@ -268,11 +268,28 @@ Für jede Eingabe \(w\) erstellt man alle \( 2 \cdot |w| -2 \) möglichen Zeugen
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
+Wir können leicht mit einer Reduktion zeigen, dass LARGE-CLIQUE NP-vollständig ist:
+%Wir betrachten zuerst die Sprache LARGE-CLIQUE. Wir beweisen, dass LARGE-CLIQUE NP-vollständig ist, indem wir beweisen, dass sie in NP und NP-schwierig ist.
+%
+%Wir nehmen als Zertifikat die Menge der Knoten, welche die LARGE-CLIQUE bilden sollen. Dann können wir in polynomieller Zeit dieses Zertifikat verifizieren, womit LARGE-CLIQUE in VP und somit auch in NP ist. Die Verifizierung von LARGE-CLIQUE stützt sich auf die bekannte (polynomielle) Verifizierung von CLIQUE, es wird nur zuerst noch geprüft, ob $k \ge \abs{V}/3$ gilt.
+\begin{equation*}
+\text{CLIQUE} \leq_P \text{LARGE-CLIQUE}
+\end{equation*}
+Die polynomielle Reduktion $A$ überprüft zuerst die Eingabe $w$. Wenn diese nicht die Form $x\#y$ hat, wobei $x$ die Kodierung eines Graphen ist, so gibt $A(w)$ die Kodierung eines Graphen mit zwei Knoten, welche nicht verbunden sind aus.
 
-Wir betrachten zuerst die Sprache LARGE-CLIQUE. Wir beweisen, dass LARGE-CLIQUE NP-vollständig ist, indem wir beweisen, dass sie in NP und NP-schwierig ist. Wir nehmen als Zertifikat die Menge der Knoten, welche die LARGE-CLIQUE bilden sollen. Dann können wir in polynomieller Zeit dieses Zertifikat verifizieren, womit LARGE-CLIQUE in VP und somit auch in NP ist. Die Verifizierung von LARGE-CLIQUE stützt sich auf die bekannte (polynomielle) Verifizierung von CLIQUE, es wird nur zuerst noch geprüft, ob $k \ge \abs{V}/3$ gilt.
+Falls aber die gewünschte Form vorliegt, so werden bei der polynomiellen Reduktion neue Knoten definiert, welche eine Kante zu jedem anderen Knoten haben. Es werden solange Knoten hinzugefügt, bis $y$ (also die Grösse der gesuchten Clique im ursprünglichen Graphen) zusammen mit den neuen Knoten mindestens einen Drittel der Gesammtmenge des entstehenden Graphen ausmacht. Sei nun $m$ die Anzahl hinzugefügter Knoten. Dann gibt die Reduktion eine Kodierung der Form $x'\#y'$ zurück, wobei $x$ die Kodierung des neuen Graphen und $y = k+m$.
 
+Beide Fälle brauchen offensichtlich höchstens lineare Zeit.
 
-%% Reduction here biatch ;D
+Zu zeigen bleibt:
+\begin{equation*}
+w \in \text{CLIQUE} \Longleftrightarrow A(w) \in \text{LARGE-CLIQUE}
+\end{equation*}
+
+Sei $w \not\in$ CLIQUE. Dann hat $w$ entweder nicht die Form $x\#y$ mit den nötigen Kodierungen, oder $x$ enthält keine Clique der Grösse $y$. Falls die Form ungültig ist, so ist $A(w)$ die Kodierung eines Graphen, welche sicher nicht in LARGE-CLIQUE enthalten ist. Falls $x$ nicht ein Graph ist mit einer clique der Grösse $y$, so hat der Graph ausgegeben von $A(w)$ auch keine clique der Grösse $k+m$, da höchstens zu einer existierenden clique $m$ neue Knoten hinzukommen.
+
+Im Falle, dass $w \in $ CLIQUE, so erweitern wir die Clique enthalten in $x$ um $m$ Knoten, und somit enthält unser neuer Graph $A(w)$ eine Clique der grösse $k+m$ mit $k+m \geq |V'|,$ wobei $|V'|$ die Knotenmenge des neuen Graphen ist. Somit ist $w\in$ LARGE-CLIQUE.
+
 
 \par
 Nun betrachten wir noch die zweite Sprache, VERY-LARGE-CLIQUE. Wir beweisen, dass VERY-LARGE-CLIQUE in P ist, indem wir eine deterministische Turingmaschine vorschlagen, welche die Sprache akzeptiert. Diese Turingmaschine verifiziert zunächst die Eingabe $(G,k)$: Falls $G$ kein Graph kodiert oder $k$ die Bedingungen der Sprache nicht erfüllt, wird verworfen. Jetzt wird geprüft, ob der ganze Graph $G$ eine CLIQUE bildet. Falls dies der Fall ist, wird angenommen. Falls nicht, generiert die Turingmaschine alle möglichen Mengen mit 3 Knoten aus $G$, was in $\Oh(\abs{V}^3)$ möglich ist. Nun verifiziert die Turingmaschine für jede dieser Mengen, ob $G$ eine CLIQUE bildet, in der die drei Knoten aus der Menge nicht vorkommen müssen. Wir geben also der Verifizierung als Zertifikat jeweils $V$ ohne einen, zwei oder alle drei Knoten aus der Menge an. Die Verifizierung läuft bekannterweise polynomiell, wir führen sie pro 3er Knotenmenge sieben Mal durch. Falls jemals eine CLIQUE gefunden wird, akzeptiert die Turingmaschine, falls nicht, verwirft sie am Ende. Die Gesamtlaufzeit ist polynomiell.
