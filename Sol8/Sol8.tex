@@ -89,6 +89,7 @@
 
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 
+
 %----------------------------------------------------------------------------------------
 %	CODE INCLUSION CONFIGURATION
 %----------------------------------------------------------------------------------------
@@ -268,17 +269,13 @@ Für jede Eingabe \(w\) erstellt man alle \( 2 \cdot |w| -2 \) möglichen Zeugen
 
 \begin{homeworkProblem}
 
-Wir betrachten zuerst die Sprache LARGE-CLIQUE. Wir beweisen, dass LARGE-CLIQUE NP-vollständig ist, indem wir beweisen, dass sie in NP und NP-schwierig ist.
-
-Wir nehmen als Zertifikat die Menge der Knoten, welche die LARGE-CLIQUE bilden sollen. Dann können wir in polynomieller Zeit dieses Zertifikat verifizieren, womit LARGE-CLIQUE in VP und somit auch in NP ist. Die Verifizierung von LARGE-CLIQUE stützt sich auf die bekannte (polynomielle) Verifizierung von CLIQUE, es wird nur zuerst noch geprüft, ob $k \ge \abs{V}/3$ gilt.
+Wir betrachten zuerst die Sprache LARGE-CLIQUE. Wir beweisen, dass LARGE-CLIQUE NP-vollständig ist, indem wir beweisen, dass sie in NP und NP-schwierig ist. Wir nehmen als Zertifikat die Menge der Knoten, welche die LARGE-CLIQUE bilden sollen. Dann können wir in polynomieller Zeit dieses Zertifikat verifizieren, womit LARGE-CLIQUE in VP und somit auch in NP ist. Die Verifizierung von LARGE-CLIQUE stützt sich auf die bekannte (polynomielle) Verifizierung von CLIQUE, es wird nur zuerst noch geprüft, ob $k \ge \abs{V}/3$ gilt.
 
 
 %% Reduction here biatch ;D
 
 \par
-Nun betrachten wir noch die zweite Sprache, VERY-LARGE-CLIQUE. Wir beweisen, dass VERY-LARGE-CLIQUE in P ist, indem wir eine deterministische Turingmaschine vorschlagen, welche die Sprache akzeptiert.
-
-Die Turingmaschine verifiziert zunächst die Eingabe $(G,k)$: Falls $G$ kein Graph kodiert oder $k$ die Bedingungen der Sprache nicht erfüllt, wird verworfen. 
+Nun betrachten wir noch die zweite Sprache, VERY-LARGE-CLIQUE. Wir beweisen, dass VERY-LARGE-CLIQUE in P ist, indem wir eine deterministische Turingmaschine vorschlagen, welche die Sprache akzeptiert. Diese Turingmaschine verifiziert zunächst die Eingabe $(G,k)$: Falls $G$ kein Graph kodiert oder $k$ die Bedingungen der Sprache nicht erfüllt, wird verworfen. Jetzt wird geprüft, ob der ganze Graph $G$ eine CLIQUE bildet. Falls dies der Fall ist, wird angenommen. Falls nicht, generiert die Turingmaschine alle möglichen Mengen mit 3 Knoten aus $G$, was in $\Oh(\abs{V}^3)$ möglich ist. Nun verifiziert die Turingmaschine für jede dieser Mengen, ob $G$ eine CLIQUE bildet, in der die drei Knoten aus der Menge nicht vorkommen müssen. Wir geben also der Verifizierung als Zertifikat jeweils $V$ ohne einen, zwei oder alle drei Knoten aus der Menge an. Die Verifizierung läuft bekannterweise polynomiell, wir führen sie pro 3er Knotenmenge sieben Mal durch. Falls jemals eine CLIQUE gefunden wird, akzeptiert die Turingmaschine, falls nicht, verwirft sie am Ende. Die Gesamtlaufzeit ist polynomiell.
 
 \end{homeworkProblem}
 
