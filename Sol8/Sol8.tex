@@ -263,7 +263,24 @@ Dementsprechend gilt \(L_1 - L_2 = L(M) \in \NTIME(f) \).
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
+Wir können leicht mit einer Reduktion zeigen, dass LARGE-CLIQUE NP-vollständig ist:
+\begin{equation*}
+\text{CLIQUE} \leq_P \text{LARGE-CLIQUE}
+\end{equation*}
+Die polynomielle Reduktion $A$ überprüft zuerst die Eingabe $w$. Wenn diese nicht die Form $x\#y$ hat, wobei $x$ die Kodierung eines Graphen ist, so gibt $A(w)$ die Kodierung eines Graphen mit zwei Knoten, welche nicht verbunden sind aus.
 
+Falls aber die gewünschte Form vorliegt, so werden bei der polynomiellen Reduktion neue Knoten definiert, welche eine Kante zu jedem anderen Knoten haben. Es werden solange Knoten hinzugefügt, bis $y$ (also die Grösse der gesuchten Clique im ursprünglichen Graphen) zusammen mit den neuen Knoten mindestens einen Drittel der Gesammtmenge des entstehenden Graphen ausmacht. Sei nun $m$ die Anzahl hinzugefügter Knoten. Dann gibt die Reduktion eine Kodierung der Form $x'\#y'$ zurück, wobei $x$ die Kodierung des neuen Graphen und $y = k+m$.
+
+Beide Fälle brauchen offensichtlich höchstens lineare Zeit.
+
+Zu zeigen bleibt:
+\begin{equation*}
+w \in \text{CLIQUE} \Longleftrightarrow A(w) \in \text{LARGE-CLIQUE}
+\end{equation*}
+
+Sei $w \not\in$ CLIQUE. Dann hat $w$ entweder nicht die Form $x\#y$ mit den nötigen Kodierungen, oder $x$ enthält keine Clique der Grösse $y$. Falls die Form ungültig ist, so ist $A(w)$ die Kodierung eines Graphen, welche sicher nicht in LARGE-CLIQUE enthalten ist. Falls $x$ nicht ein Graph ist mit einer clique der Grösse $y$, so hat der Graph ausgegeben von $A(w)$ auch keine clique der Grösse $k+m$, da höchstens zu einer existierenden clique m neue Knoten hinzukommen.
+
+Im Falle, dass $w \in $ CLIQUE, so erweitern wir die Clique enthalten in $x$ um $m$ Knoten, und somit enthält unser neuer Graph $A(w)$ eine Clique der grösse $k+m$ mit $k+m \geq |V'|,$ wobei $|V'|$ die Knotenmenge des neuen Graphen ist. Somit ist $w\in$ LARGE-CLIQUE.
 \end{homeworkProblem}
 
 %---------------------------------------------------------------------------------------- 
