@@ -268,10 +268,11 @@ Für jede Eingabe \(w\) erstellt man alle \( 2 \cdot |w| -2 \) möglichen Zeugen
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-Wir können leicht mit einer Reduktion zeigen, dass LARGE-CLIQUE NP-vollständig ist:
-%Wir betrachten zuerst die Sprache LARGE-CLIQUE. Wir beweisen, dass LARGE-CLIQUE NP-vollständig ist, indem wir beweisen, dass sie in NP und NP-schwierig ist.
-%
-%Wir nehmen als Zertifikat die Menge der Knoten, welche die LARGE-CLIQUE bilden sollen. Dann können wir in polynomieller Zeit dieses Zertifikat verifizieren, womit LARGE-CLIQUE in VP und somit auch in NP ist. Die Verifizierung von LARGE-CLIQUE stützt sich auf die bekannte (polynomielle) Verifizierung von CLIQUE, es wird nur zuerst noch geprüft, ob $k \ge \abs{V}/3$ gilt.
+Wir betrachten zuerst die Sprache LARGE-CLIQUE. Wir beweisen, dass LARGE-CLIQUE NP-vollständig ist, indem wir beweisen, dass sie in NP und NP-schwierig ist.
+
+Wir nehmen als Zertifikat die Menge der Knoten, welche die LARGE-CLIQUE bilden sollen. Dann können wir in polynomieller Zeit dieses Zertifikat verifizieren, womit LARGE-CLIQUE in VP und somit auch in NP ist. Die Verifizierung von LARGE-CLIQUE stützt sich auf die bekannte (polynomielle) Verifizierung von CLIQUE, es wird nur zuerst noch geprüft, ob $k \ge \abs{V}/3$ gilt.
+
+Wir können mit einer Reduktion zeigen, dass LARGE-CLIQUE NP-schwierig ist:
 \begin{equation*}
 \text{CLIQUE} \leq_P \text{LARGE-CLIQUE}
 \end{equation*}
