@@ -276,23 +276,23 @@ Wir können mit einer Reduktion zeigen, dass LARGE-CLIQUE NP-schwierig ist:
 \begin{equation*}
 \text{CLIQUE} \leq_P \text{LARGE-CLIQUE}
 \end{equation*}
-Die polynomielle Reduktion $A$ überprüft zuerst die Eingabe $w$. Wenn diese nicht die Form $x\#y$ hat, wobei $x$ die Kodierung eines Graphen ist, so gibt $A(w)$ die Kodierung eines Graphen mit zwei Knoten, welche nicht verbunden sind aus.
+Die polynomielle Reduktion $A$ überprüft zuerst die Eingabe $w$. Wenn diese nicht die Form $x\#y$ hat, wobei $x$ die Kodierung eines Graphen ist, so gibt $A(w)$ die Kodierung eines Graphen mit zwei Knoten aus, welche nicht verbunden sin.
 
-Falls aber die gewünschte Form vorliegt, so werden bei der polynomiellen Reduktion neue Knoten definiert, welche eine Kante zu jedem anderen Knoten haben. Es werden solange Knoten hinzugefügt, bis $y$ (also die Grösse der gesuchten Clique im ursprünglichen Graphen) zusammen mit den neuen Knoten mindestens einen Drittel der Gesammtmenge des entstehenden Graphen ausmacht. Sei nun $m$ die Anzahl hinzugefügter Knoten. Dann gibt die Reduktion eine Kodierung der Form $x'\#y'$ zurück, wobei $x$ die Kodierung des neuen Graphen und $y = k+m$.
+Falls aber die gewünschte Form vorliegt, so werden bei der polynomiellen Reduktion neue Knoten definiert, welche eine Kante zu jedem anderen Knoten haben. Es werden solange Knoten hinzugefügt, bis die Anzahl neuer Knoten genau einen Drittel (aufgerundet) der Gesamtmenge des entstehenden Graphen ausmacht. Sei nun $m$ die Anzahl hinzugefügter Knoten. Dann gibt die Reduktion eine Kodierung der Form $x'\#y'$ zurück, wobei $x'$ die Kodierung des neuen Graphen ist und $y' = y+m$ gilt.
 
-Beide Fälle brauchen offensichtlich höchstens lineare Zeit.
+Der erste Fall erfolgt offensichtlich in linearer Zeit, da lediglich die Eingabe inspiziert wird, und dann in konstanter Zeit eine Ausgabe generiert wird. Das hinzufügen der $m$ Knoten und ihrer jeweiligen Kanten braucht höchstens $\Oh(n+m)$ Schritte für jeden neuen Knoten. Für $m$ neue Knoten ergibt das also eine Laufzeit von $m*\Oh(n+m) = \Oh(m*(n+m)) = \Oh(mn + m^2)$. Da $m$ aber immer ein Drittel der Knoten im neuen Graphen ist, muss $m$ weniger als die Hälfte der Knoten des alten Graphen sein, es gilt auf jeden Fall $m \leq n$. Somit brauchen wir höchstens $\Oh(n^2)$ Zeit. Die Reduktion ist also polynomiell.
 
 Zu zeigen bleibt:
 \begin{equation*}
 w \in \text{CLIQUE} \Longleftrightarrow A(w) \in \text{LARGE-CLIQUE}
 \end{equation*}
 
-Sei $w \not\in$ CLIQUE. Dann hat $w$ entweder nicht die Form $x\#y$ mit den nötigen Kodierungen, oder $x$ enthält keine Clique der Grösse $y$. Falls die Form ungültig ist, so ist $A(w)$ die Kodierung eines Graphen, welche sicher nicht in LARGE-CLIQUE enthalten ist. Falls $x$ nicht ein Graph ist mit einer clique der Grösse $y$, so hat der Graph ausgegeben von $A(w)$ auch keine clique der Grösse $k+m$, da höchstens zu einer existierenden clique $m$ neue Knoten hinzukommen.
+Sei $w \not\in$ CLIQUE. Dann hat $w$ entweder nicht die Form $x\#y$ mit den nötigen Kodierungen, oder $x$ enthält keine Clique der Grösse $y$. Falls die Form ungültig ist, so ist $A(w)$ die Kodierung eines Graphen, welche sicher nicht in LARGE-CLIQUE enthalten ist. Falls $x$ nicht ein Graph ist mit einer clique der Grösse $y$, so hat der Graph ausgegeben von $A(w)$ auch keine clique der Grösse $y+m$, da die grösste neue Clique dieselbe ist, wie die ursprüngliche grösste Clique mit zusätzlichen m Knoten.
 
-Im Falle, dass $w \in $ CLIQUE, so erweitern wir die Clique enthalten in $x$ um $m$ Knoten, und somit enthält unser neuer Graph $A(w)$ eine Clique der grösse $k+m$ mit $k+m \geq |V'|,$ wobei $|V'|$ die Knotenmenge des neuen Graphen ist. Somit ist $w\in$ LARGE-CLIQUE.
+Im Falle, dass $w \in $ CLIQUE, so enthält $x$ eine Clique der Grösse $y$. Falls $y \geq \abs{V}/3$, so ist $A(w)=w$ und $w \in$ LARGE-CLIQUE.
+Ansonsten werden in den Graphen die $m$ neuen Knoten eingefügt. Wir wissen, dass es im alten Graphen eine $y$-Clique gab, und dass die neuen Knoten miteinander und jedem anderen Knoten verbunden sind. Es ist also jeder neue Knoten mit jedem Knoten der $y$-Clique verbunden. Folglich haben wir die $y$-Clique um $m$ Knoten erweitert. Der neue Graph hat also eine $(m+y)$-Clique. Zusätzlich gilt $m+y \geq \abs{V'}/3$. Somit ist $A(w) \in$ LARGE-CLIQUE.
 
-
-\par
+\vspace{5mm}
 Nun betrachten wir noch die zweite Sprache, VERY-LARGE-CLIQUE. Wir beweisen, dass VERY-LARGE-CLIQUE in P ist, indem wir eine deterministische Turingmaschine vorschlagen, welche die Sprache akzeptiert. Diese Turingmaschine verifiziert zunächst die Eingabe $(G,k)$: Falls $G$ kein Graph kodiert oder $k$ die Bedingungen der Sprache nicht erfüllt, wird verworfen. Jetzt wird geprüft, ob der ganze Graph $G$ eine CLIQUE bildet. Falls dies der Fall ist, wird angenommen. Falls nicht, generiert die Turingmaschine alle möglichen Mengen mit 3 Knoten aus $G$, was in $\Oh(\abs{V}^3)$ möglich ist. Nun verifiziert die Turingmaschine für jede dieser Mengen, ob $G$ eine CLIQUE bildet, in der die drei Knoten aus der Menge nicht vorkommen müssen. Wir geben also der Verifizierung als Zertifikat jeweils $V$ ohne einen, zwei oder alle drei Knoten aus der Menge an. Die Verifizierung läuft bekannterweise polynomiell, wir führen sie pro 3er Knotenmenge sieben Mal durch. Falls jemals eine CLIQUE gefunden wird, akzeptiert die Turingmaschine, falls nicht, verwirft sie am Ende. Die Gesamtlaufzeit ist polynomiell.
 
 \end{homeworkProblem}
