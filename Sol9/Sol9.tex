@@ -253,7 +253,23 @@ Damit eine Formel erfüllbar ist, ist sie nicht widersprüchlich ( \(  !\exists 
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-
+Wir zeigen, dass \(PARTITION\) NP-vollständig ist, in dem wir die Reduktion \( SUBSET SUM \leq_p PARTITION \) zeigen. Mit anderen worten, wollen wir $A$ bestimmen, so dass
+\[ x \in SUBSET SUM \Leftrightarrow A(x) \in PARTITION \]
+Die Idee dabei ist, auszunutzen, dass wenn \( x \in SUBSETSUM\), folgt, dass es $x$ die Kodierung einer Menge $S$ von natürlichen Zahlen und einer natürlichen Zahl ist, wobei eine Untermenge $U$ von $S$ existiert, deren Elemente zu $t$ summieren. Wir bemerken also, dass dies nicht allzuweit von der Bedingung, die von $PARTITION$ gestellt wird enterft ist. Wir müssen also sicherstellen, dass es einen "Gegenpart" zu $U$ gibt, der ebenfalls zu t aufsummiert, jedoch kein Element aus $U$ enthalten kann. \\
+Im Fall, wo \( x \notin SUBSETSUM\), wollen wir einfach eine Garantie haben, dass die Kodierung des Sets, das wir an $PARTITION$ weitergeben, keine Partition erlauben kann. \\
+Dementsprechend definieren wir A wie folgt: 
+\begin{enumerate}[-]
+\item Simuliere das $SUBSET SUM$ Problem.
+\item Falls \(  x \in SUBSET SUM \)
+	\begin{enumerate}[1.]
+	\item $U$ und $t$ werden bei der Simulation gespeichert (z.B. auf einem dafür destinierten Arbeitsband). 
+	\item Falls $|U| = 1 \vee (|U|=2 \wedge 0 \in U),\ U' := {t-1,1}$
+	\item Sonst $U'=\{t\}$
+	\item Übergebe $U \cup U'$ ,d.h. $A(X) = Kodierung(U \cup U') $
+	\end{enumerate}
+\item Falls \(  x \notin SUBSET SUM \) \\
+	Übergebe $\{1\}$ ,d.h. $A(X) = Kodierung( \{ 1 \}) $
+\end{enumerate}
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
