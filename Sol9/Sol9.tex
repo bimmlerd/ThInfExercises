@@ -185,7 +185,7 @@
 \newcommand{\hmwkDueDate}{05.\ Dezember\ 2014} % Due date
 \newcommand{\hmwkClass}{Theoretische Informatik} % Course/class
 \newcommand{\hmwkClassInstructor}{Prof. Welzl} % Teacher/lecturer
-\newcommand{\hmwkAuthorName}{Kevin Klein, Vincent von Rotz und David Bimmler} % Your name
+\newcommand{\hmwkAuthorName}{David Bimmler, Vincent von Rotz und Kevin Klein} % Your name
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -227,7 +227,7 @@
 $t$ ist so definiert, dass
 \[ \forall l \in [1,n],\ t[l] = 1 \]
 Da für $i=l$ $r_i$ und ${r_i}'$ so definiert sind, dass beide an Stelle $l$ 1 sind, folgt unmittelbar
-\[ \forall i \in [1,n],\ r_i \in U \otimes {r_i}' \in U  \text{ (1)}\]
+\[ \forall i \in [1,n],\ r_i \in U \oplus {r_i}' \in U  \text{ (1)}\]
 Die Definition von $t$ besagt ebenfalls, dass
 \[\forall l \in [n+1, n+k],\ t[l]=4 \]
 Wir bemerken, dass wir für jedes $l$, eine Summe in $[1,3]$ erreichen können, indem wir $s_l$ und ${s_l}'$ in $U$ einfügen. Um eine Summe von 4 zu erreichen, müssen wir also für jedes l eine Summe in $[1,3]$ durch das Hinzunehmen von $r_i$ bzw. ${r_i}'$ erreichen. Mit anderen Worten müssen wir also für jede Stelle l ein bis drei $r_i$ bzw. ${r_i}'$ mit $r_i[l] = 1$ bzw. ${r_i}'[l] = 1$ in $U$ haben. (2)\\
@@ -237,15 +237,15 @@ Wir bemerken, dass wir für jedes $l$, eine Summe in $[1,3]$ erreichen können, 
 %anderer Ansatz Ende
 
 Dank (1) und (2) folgt: \\
-\( \sum_{x \in U} x = t \Leftrightarrow ( \forall i \in [1..n],\ r_i[i] = 1 \otimes {r_i}'[i] = 1 ) \wedge (\forall l \in [n+1,n+k],\ \exists\ r_i\ \text{(bzw. ${r_i}'$ ) } s.t.\ r_i[l] = 1) \) \\
-\( \Leftrightarrow  (\forall i \in [1,n]\ r_i \in U \otimes {r_i}' \in U) \wedge (\forall l \in [n+1,n+k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l-n}$ vor}) \) \\
-\( \Leftrightarrow  (\forall i \in [1,n]\ r_i \in U \otimes {r_i}' \in U) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \) \\
-\( \Leftrightarrow  (\forall x_i,\ r_i \in U \otimes {r_i}' \in U) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \)
+\( \sum_{x \in U} x = t \Leftrightarrow ( \forall i \in [1..n],\ r_i[i] = 1 \oplus {r_i}'[i] = 1 ) \wedge (\forall l \in [n+1,n+k],\ \exists\ r_i\ \text{(bzw. ${r_i}'$ ) } s.t.\ r_i[l] = 1) \) \\
+\( \Leftrightarrow  (\forall i \in [1,n]\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [n+1,n+k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l-n}$ vor}) \) \\
+\( \Leftrightarrow  (\forall i \in [1,n]\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \) \\
+\( \Leftrightarrow  (\forall x_i,\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \)
 Wir nehmen immer entweder $r_i$ oder ${r_i}'$, also können wir $r_i$ als Wahrheitswert für $x_i$ betrachten. Falls $x_i = 1$ nehmen wir $r_i \in U$, falls $x_i = 0$ nemen wir ${r_i}' \in U$. \\
-\( \Leftrightarrow (\forall x_i, x_i = 1 \otimes x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \) \\
+\( \Leftrightarrow (\forall x_i, x_i = 1 \oplus x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \) \\
 Damit eine Formel erfüllbar ist, ist sie nicht widersprüchlich ( \(  !\exists x_i\ s.t.\ x_i = 1, \overline{x_i} = 1 \) ) und muss man in jeder Klausel eine Variabel für die Erfüllung der Klausel verantwortlich machen können.  \\
 % Nicht sicher ob klar dass \exists x_i in C_l \implies man kann \x_i verantworrlich machen, glaub aber schon weil man die i's ja theoretisch beliebig setzen kann
-\( \Leftrightarrow (\forall x_i, x_i = 1 \otimes x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ erfüllt Klausel $C_{l}$ }) \) \\
+\( \Leftrightarrow (\forall x_i, x_i = 1 \oplus x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ erfüllt Klausel $C_{l}$ }) \) \\
 \( \Leftrightarrow  \Phi = C_1 \wedge C_2 \wedge ... \wedge C_k \text{ ist erfüllbar } \)
 \end{homeworkProblem}
 %----------------------------------------------------------------------------------------
@@ -253,22 +253,22 @@ Damit eine Formel erfüllbar ist, ist sie nicht widersprüchlich ( \(  !\exists 
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-Wir zeigen, dass \(PARTITION\) NP-vollständig ist, in dem wir die Reduktion \( SUBSET SUM \leq_p PARTITION \) zeigen. Mit anderen worten, wollen wir $A$ bestimmen, so dass
-\[ x \in SUBSET SUM \Leftrightarrow A(x) \in PARTITION \]
-Die Idee dabei ist, auszunutzen, dass wenn \( x \in SUBSETSUM\), folgt, dass es $x$ die Kodierung einer Menge $S$ von natürlichen Zahlen und einer natürlichen Zahl ist, wobei eine Untermenge $U$ von $S$ existiert, deren Elemente zu $t$ summieren. Wir bemerken also, dass dies nicht allzuweit von der Bedingung, die von $PARTITION$ gestellt wird enterft ist. Wir müssen also sicherstellen, dass es einen "Gegenpart" zu $U$ gibt, der ebenfalls zu t aufsummiert, jedoch kein Element aus $U$ enthalten kann. \\
-Im Fall, wo \( x \notin SUBSETSUM\), wollen wir einfach eine Garantie haben, dass die Kodierung des Sets, das wir an $PARTITION$ weitergeben, keine Partition erlauben kann. \\
+Wir zeigen, dass PARTITION NP-vollständig ist, indem wir die Reduktion SUBSET-SUM $\leq_p$ PARTITION zeigen. Mit anderen Worten wollen wir $A$ bestimmen, so dass
+\[ x \in \text{SUBSET-SUM } \Leftrightarrow A(x) \in \text{PARTITION} \]
+Die Idee dabei ist, auszunutzen, dass wenn \( x \in \) SUBSET-SUM, folgt, dass es $x$ die Kodierung einer Menge $S$ von natürlichen Zahlen und einer natürlichen Zahl ist, wobei eine Untermenge $U$ von $S$ existiert, deren Elemente zu $t$ summieren. Wir bemerken also, dass dies nicht allzuweit von der Bedingung, die von PARTITION gestellt wird entfernt ist. Wir müssen also sicherstellen, dass es einen ``Gegenpart'' zu $U$ gibt, der ebenfalls zu $t$ aufsummiert, jedoch kein Element aus $U$ enthalten kann. \\
+Im Fall \( x \notin \) SUBSET-SUM wollen wir einfach eine Garantie haben, dass die Kodierung des Sets, welches wir an PARTITION weitergeben, keine Partition erlauben kann. \\
 Dementsprechend definieren wir A wie folgt: 
-\begin{enumerate}[-]
-\item Simuliere das $SUBSET SUM$ Problem.
-\item Falls \(  x \in SUBSET SUM \)
+\begin{enumerate}[•]
+\item Simuliere das $\text{SUBSET-SUM}$ Problem.
+\item Falls \(  x \in \text{SUBSET-SUM} \)
 	\begin{enumerate}[1.]
 	\item $U$ und $t$ werden bei der Simulation gespeichert (z.B. auf einem dafür destinierten Arbeitsband). 
 	\item Falls $|U| = 1 \vee (|U|=2 \wedge 0 \in U),\ U' := {t-1,1}$
 	\item Sonst $U'=\{t\}$
 	\item Übergebe $U \cup U'$ ,d.h. $A(X) = Kodierung(U \cup U') $
 	\end{enumerate}
-\item Falls \(  x \notin SUBSET SUM \) \\
-	Übergebe $\{1\}$ ,d.h. $A(X) = Kodierung( \{ 1 \}) $
+\item Falls \(  x \notin \text{SUBSET-SUM} \) \\
+	Übergebe $\{1\}$, d.h. $A(X) = Kodierung( \{ 1 \}) $
 \end{enumerate}
 \end{homeworkProblem}
 
