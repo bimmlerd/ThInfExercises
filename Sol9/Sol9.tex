@@ -21,6 +21,7 @@
 
 \usepackage[swissgerman]{babel}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
@@ -237,16 +238,18 @@ Wir bemerken, dass wir für jedes $l$, eine Summe in $[1,3]$ erreichen können, 
 %anderer Ansatz Ende
 
 Dank (1) und (2) folgt: \\
-\( \sum_{x \in U} x = t \Leftrightarrow ( \forall i \in [1..n],\ r_i[i] = 1 \oplus {r_i}'[i] = 1 ) \wedge (\forall l \in [n+1,n+k],\ \exists\ r_i\ \text{(bzw. ${r_i}'$ ) } s.t.\ r_i[l] = 1) \) \\
-\( \Leftrightarrow  (\forall i \in [1,n]\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [n+1,n+k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l-n}$ vor}) \) \\
-\( \Leftrightarrow  (\forall i \in [1,n]\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \) \\
-\( \Leftrightarrow  (\forall x_i,\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \)
-Wir nehmen immer entweder $r_i$ oder ${r_i}'$, also können wir $r_i$ als Wahrheitswert für $x_i$ betrachten. Falls $x_i = 1$ nehmen wir $r_i \in U$, falls $x_i = 0$ nemen wir ${r_i}' \in U$. \\
-\( \Leftrightarrow (\forall x_i, x_i = 1 \oplus x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \) \\
-Damit eine Formel erfüllbar ist, ist sie nicht widersprüchlich ( \(  !\exists x_i\ s.t.\ x_i = 1, \overline{x_i} = 1 \) ) und muss man in jeder Klausel eine Variabel für die Erfüllung der Klausel verantwortlich machen können.  \\
+\begin{align*}
+\sum_{x \in U} x = t &\Leftrightarrow ( \forall i \in [1..n],\ r_i[i] = 1 \oplus {r_i}'[i] = 1 ) \wedge (\forall l \in [n+1,n+k],\ \exists\ r_i\ \text{(bzw. ${r_i}'$ ) } s.t.\ r_i[l] = 1)  \\
+&\Leftrightarrow  (\forall i \in [1,n]\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [n+1,n+k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l-n}$ vor}) \\
+&\Leftrightarrow  (\forall i \in [1,n]\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \\
+&\Leftrightarrow  (\forall x_i,\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \\
+\intertext{Wir nehmen immer entweder $r_i$ oder ${r_i}'$, also können wir $r_i$ als Wahrheitswert für $x_i$ betrachten. Falls $x_i = 1$ nehmen wir $r_i \in U$, falls $x_i = 0$ nehmen wir ${r_i}' \in U$.}
+&\Leftrightarrow (\forall x_i, x_i = 1 \oplus x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \\
+\intertext{Damit eine Formel erfüllbar ist, ist sie nicht widersprüchlich ( \( \nexists x_i\ s.t.\ x_i = 1, \overline{x_i} = 1 \) ) und muss man in jeder Klausel eine Variabel für die Erfüllung der Klausel verantwortlich machen können.}
+&\Leftrightarrow (\forall x_i, x_i = 1 \oplus x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ erfüllt Klausel $C_{l}$ }) \\
+&\Leftrightarrow  \Phi = C_1 \wedge C_2 \wedge ... \wedge C_k \text{ ist erfüllbar }
+\end{align*}
 % Nicht sicher ob klar dass \exists x_i in C_l \implies man kann \x_i verantworrlich machen, glaub aber schon weil man die i's ja theoretisch beliebig setzen kann
-\( \Leftrightarrow (\forall x_i, x_i = 1 \oplus x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ erfüllt Klausel $C_{l}$ }) \) \\
-\( \Leftrightarrow  \Phi = C_1 \wedge C_2 \wedge ... \wedge C_k \text{ ist erfüllbar } \)
 \end{homeworkProblem}
 %----------------------------------------------------------------------------------------
 %	PROBLEM 28
