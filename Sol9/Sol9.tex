@@ -253,9 +253,10 @@ Damit eine Formel erfüllbar ist, ist sie nicht widersprüchlich ( \(  !\exists 
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-Wir zeigen, dass PARTITION NP-vollständig ist, indem wir die Reduktion SUBSET-SUM $\leq_p$ PARTITION zeigen. Mit anderen Worten wollen wir $A$ bestimmen, so dass
-\[ x \in \text{SUBSET-SUM } \Leftrightarrow A(x) \in \text{PARTITION} \]
-Die Idee dabei ist, auszunutzen, dass wenn \( x \in \) SUBSET-SUM, folgt, dass es $x$ die Kodierung einer Menge $S$ von natürlichen Zahlen und einer natürlichen Zahl ist, wobei eine Untermenge $U$ von $S$ existiert, deren Elemente zu $t$ summieren. Wir bemerken also, dass dies nicht allzuweit von der Bedingung, die von PARTITION gestellt wird entfernt ist. Wir müssen also sicherstellen, dass es einen ``Gegenpart'' zu $U$ gibt, der ebenfalls zu $t$ aufsummiert, jedoch kein Element aus $U$ enthalten kann. \\
+Wir zeigen, dass PARTITION NP-schwer ist, indem wir die Reduktion SUBSET-SUM $\leq_p$ PARTITION zeigen. Mit anderen Worten wollen wir $A$ so bestimmen, dass
+\[ x \in \text{SUBSET-SUM } \Leftrightarrow A(x) \in \text{PARTITION}. \]
+%Die Idee dabei ist, auszunutzen, dass wenn \( x \in \) SUBSET-SUM, folgt, dass es $x$ die Kodierung einer Menge $S$ von natürlichen Zahlen und einer natürlichen Zahl ist, wobei eine Untermenge $U$ von $S$ existiert, deren Elemente zu $t$ summieren.
+Wir nutzen aus, dass aus \( x \in \) SUBSET-SUM folgt, dass $x$ die Kodierung einer Menge $S$ von natürlichen Zahlen und einer natürlichen Zahl $t$ ist, wobei eine Untermenge $U$ von $S$ existiert, deren Elemente zu $t$ summieren. Wir bemerken, dass dies nicht allzu weit von der Bedingung, die von PARTITION gestellt wird, entfernt ist. Wir müssen also sicherstellen, dass es einen ``Gegenpart'' zu $U$ gibt, der ebenfalls zu $t$ aufsummiert, jedoch kein Element aus $U$ enthalten kann. \\
 Im Fall \( x \notin \) SUBSET-SUM wollen wir einfach eine Garantie haben, dass die Kodierung des Sets, welches wir an PARTITION weitergeben, keine Partition erlauben kann. \\
 Dementsprechend definieren wir A wie folgt: 
 \begin{enumerate}[•]
