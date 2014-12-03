@@ -260,12 +260,12 @@ Wir zeigen, dass PARTITION NP-schwer ist, indem wir die Reduktion SUBSET-SUM $\l
 \[ x \in \text{SUBSET-SUM } \Leftrightarrow A(x) \in \text{PARTITION}. \]
 Die Idee dabei ist, zu verwenden, dass wir wenn \( x \in \) SUBSET-SUM, folgt, dass wir für eine Teilmenge von $S$ die Summe, $t$ kennen. \\
 A funktionniert wie folgt:
-\begin{enumerate}[-]
+\begin{enumerate}[1.]
 \item Da $x$ die Kodierung von der Menge $S$ und der Zahl $t$ ist, kennt man $t$ in $\Oh(1)$. Man berechnet in \( \Oh(n)\ \sum_{x \in S} x = T \). 
 \item Wenn $T < t$ übergeben wir $\{1\}$
 \item Wenn $T=t$ 
  	\begin{enumerate}
-	\item Wenn \( |S| = 1 \vee (|S| = 2 \wedge 0 \in S\) \\
+	\item Wenn \( |S| = 1 \vee (|S| = 2 \wedge 0 \in S)\) \\
 		Es folgt, dass $t \in S$, also sind $t-1, 1$ nicht in $S$. \\
 		Wir übergeben $S \cup \{ t-1, 1 \}$.
 	\item Sonst \\
@@ -276,16 +276,21 @@ A funktionniert wie folgt:
 	\begin{enumerate}
 	\item Wenn $T-t = t$ \\
 		Wir übergeben S.
+		%passt
 	\item Wenn $T-t > t$ \\
 		Falls $T - 2 \cdot t  \in S$, folgt, dass es eine zweite disjunkte Untermenge in $S$ gibt, deren Summe $t$ 			beträgt. Also Übergeben wir $ S \backslash \{ T - 2 \cdot t \}$. \\
 		Sonst übergeben wir \( S \cup \{ T - 2 \cdot t \} \).
 		%Was wenn 2*t - T in U?
 	\item Wenn $T-t < t$ \\
-		Falls $2 \cdot t - T \in S$ , gibt es eine disjunkte Teilmenge in $S$ die zu $3 \cdot t -T$ aufsummiert. Da 			$U$ und $\{2 \cdot t - T\}$ ebenfalls zu $3t-T$ aufsummieren, übergben wir $S$. 
-		Sonst übergeben wir\(S \cup \{ 2 \cdot t - T\} \).
+		Falls $2 \cdot t - T \in S$ , gibt es eine disjunkte Teilmenge in $S$ die zu $3 \cdot t -T$ aufsummiert. Da 			$U$ und $\{2 \cdot t - T\}$ ebenfalls zu $3t-T$ aufsummieren, übergben wir $S$. \\
+		Sonst übergeben wir \(S \cup \{ 2 \cdot t - T\} \).
 		%Was wenn T-2*t in U?
 	\end{enumerate}
 \end{enumerate}
+Zeigen wir nun, dass für jeden Fall die gegebene Äquivalenz gilt. \\
+2.: Da $T < t$ gilt immer, dass $x \notin $ SUBSET-SUM. Es gilt ebenfalls immer, dass $A(x) = Kodierung(\{1\}) \notin$ PARTITION. \\
+3. a): \( x \in \text{SUBSET-SUM} \Leftrightarrow t \in S \wedge \sum_{x \in S} x = t \Leftrightarrow A(x) = Kodierung( \{t,t-1,1\}) \Leftrightarrow  \{t,t-1,1\} \in PARTITION \) \\
+3.b): Es gilt immer, dass 
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
