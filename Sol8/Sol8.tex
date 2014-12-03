@@ -256,15 +256,15 @@ Dementsprechend gilt \(L_1 - L_2 = L(M) \in \NTIME(f) \).
 \item
 Sei \(L \in \NSPACE(f(n))\ \cap\  \NTIME(f(n)^k) \).
 Somit gibt es eine NMTM \(M\) mit \( L(M) = M \) wobei \(Space_M(n) \leq c \cdot f(n) \) für ein gewisses \(c\). 
-Des weiteren folgt, dass \(M\) ein Wort \(w \in L(M) \) innerhalb von \(c'  \cdot f(n)^k \) Schritten akzeptieren muss, für ein bestimmtes  \(c\). \\
+Ausserdem folgt, dass \(M\) ein Wort \(w \in L(M) \) innerhalb von \(c'  \cdot f(n)^k \) Schritten akzeptieren muss, für ein bestimmtes  \(c\). \\
 Offensichtlich können wir \(c'\) mit \(\Oh(1)\) Speicherplatz berechnen und speichern. \(c' \cdot f(n)^k \) können wir ebenfalls offensichtlich mit \(\Oh(f(n)^k)\) Speicherplatz speichern. Um nun herauszufinden, ob eine akzeptierende Konfiguration in \(c' \cdot f(n)^k \) Schritten erreicht werden kann, übergeben wir der uns bekannten Funktion REACHABLE als Parameter \(m\ c' \cdot f(n)^k \). \\
-Insofern nicht anders erwähnt, funktionniert die angestrebte NMTM gleich als in Satz 6.7. \\
+Insofern nicht anders erwähnt, funktioniert die vorgeschlagene NMTM gleich wie in Satz 6.7. \\
 Für das Speichern einer inneren Konfiguration wird \(  \Oh( f(n)) \) Speicher benötigt. 
 % Das einfach zu behaupten ist schon scheiße, wurde aber in S 6.7 identisch gehandhabt
 Die Anzahl der rekursiven Aufrufe von REACHABLE ist höchstens \(\log_2(2 \cdot c'  \cdot f(n)^k)  = c'' * \log(f(n)) \).
 % idem
 % Dieses Resultat ist richtig
-Insgesamt ergiebt dies also \( \Oh(f(n)) \cdot \Oh(\log(f(n)))= \Oh(f(n) \cdot \log(f(n))) \) viel Speicherplatz.
+Insgesamt ergibt dies also \( \Oh(f(n)) \cdot \Oh(\log(f(n)))= \Oh(f(n) \cdot \log(f(n))) \) viel Speicherplatz.
 \end{enumerate}
 \end{homeworkProblem}
 
