@@ -277,11 +277,13 @@ A funktionniert wie folgt:
 	\item Wenn $T-t = t$ \\
 		Wir übergeben S.
 	\item Wenn $T-t > t$ \\
-		Wir übergeben \(S \cup \{ T - 2 \cdot t \} \).
-		%missing smart idea
+		Falls $T - 2 \cdot t  \in S$, folgt, dass es eine zweite disjunkte Untermenge in $S$ gibt, deren Summe $t$ 			beträgt. Also Übergeben wir $ S \backslash \{ T - 2 \cdot t \}$. \\
+		Sonst übergeben wir \( S \cup \{ T - 2 \cdot t \} \).
+		%Was wenn 2*t - T in U?
 	\item Wenn $T-t < t$ \\
-		Wir übergeben \(S \cup \{ 2 \cdot t - T\} \).
-		% missing smart idea 
+		Falls $2 \cdot t - T \in S$ , gibt es eine disjunkte Teilmenge in $S$ die zu $3 \cdot t -T$ aufsummiert. Da 			$U$ und $\{2 \cdot t - T\}$ ebenfalls zu $3t-T$ aufsummieren, übergben wir $S$. 
+		Sonst übergeben wir\(S \cup \{ 2 \cdot t - T\} \).
+		%Was wenn T-2*t in U?
 	\end{enumerate}
 \end{enumerate}
 \end{homeworkProblem}
