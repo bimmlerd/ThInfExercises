@@ -245,7 +245,7 @@ Dank (1) und (2) folgt: \\
 &\Leftrightarrow  (\forall x_i,\ r_i \in U \oplus {r_i}' \in U) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \\
 \intertext{Wir nehmen immer entweder $r_i$ oder ${r_i}'$, also können wir $r_i$ als Wahrheitswert für $x_i$ betrachten. Falls $x_i = 1$ nehmen wir $r_i \in U$, falls $x_i = 0$ nehmen wir ${r_i}' \in U$.}
 &\Leftrightarrow (\forall x_i, x_i = 1 \oplus x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ kommt in Klausel $C_{l}$ vor}) \\
-\intertext{Damit eine Formel erfüllbar ist, ist sie nicht widersprüchlich ( \( \nexists x_i\ s.t.\ x_i = 1, \overline{x_i} = 1 \) ) und muss man in jeder Klausel eine Variabel für die Erfüllung der Klausel verantwortlich machen können.}
+\intertext{Damit eine Formel erfüllbar ist, ist sie nicht widersprüchlich ( \( \nexists x_i\ s.t.\ x_i = 1, \overline{x_i} = 1 \) ) und muss man in jeder Klausel eine Variabel für die Erfüllung der Klausel verantwortlich machen können. Wir können für jede Klausel das $x_i$ von dem wir wissen, dass es in der Klausel vorkommt, für die Erfüllung der Klausel verantwortlich machen, insofern diese erfüllt wird. Dies ist uns möglich, da die wir die Indizes frei wählen können, und sowohl $x_i$ als auch $\overline{(x_i}$ betrachtet wird.}
 &\Leftrightarrow (\forall x_i, x_i = 1 \oplus x_i = 0 ) \wedge (\forall l \in [1,k],\ \exists\ x_i\ \text{(bzw. $\overline{x_i}$ ) } s.t.\ x_i \text{ erfüllt Klausel $C_{l}$ }) \\
 &\Leftrightarrow  \Phi = C_1 \wedge C_2 \wedge ... \wedge C_k \text{ ist erfüllbar }
 \end{align*}
@@ -284,13 +284,23 @@ A funktionniert wie folgt:
 	\item Wenn $T-t < t$ \\
 		Falls $2 \cdot t - T \in S$ , gibt es eine disjunkte Teilmenge in $S$ die zu $3 \cdot t -T$ aufsummiert. Da 			$U$ und $\{2 \cdot t - T\}$ ebenfalls zu $3t-T$ aufsummieren, übergben wir $S$. \\
 		Sonst übergeben wir \(S \cup \{ 2 \cdot t - T\} \).
-		%Was wenn T-2*t in U?
+		%Was wenn T-2*t in S\U?
 	\end{enumerate}
 \end{enumerate}
 Zeigen wir nun, dass für jeden Fall die gegebene Äquivalenz gilt. \\
 2.: Da $T < t$ gilt immer, dass $x \notin $ SUBSET-SUM. Es gilt ebenfalls immer, dass $A(x) = Kodierung(\{1\}) \notin$ PARTITION. \\
 3. a): \( x \in \text{SUBSET-SUM} \Leftrightarrow t \in S \wedge \sum_{x \in S} x = t \Leftrightarrow A(x) = Kodierung( \{t,t-1,1\}) \Leftrightarrow  \{t,t-1,1\} \in PARTITION \) \\
-3.b): Es gilt immer, dass 
+3.b): Es gilt immer, dass $S$ zu $t$ aufsummiert, $t$ jedoch nicht beinhaltet. Demnach ist $S\ \cup\ \{t\}$ eine offensichtliche Partition. \\
+4. a): Es gilt immer, dass $T=2t$. \\
+\(x \in \text{SUBSET-SUM} \Leftrightarrow T = 2t\ \wedge\ \exists U \subset S\ s.t. \sum_{x \in U} x = t \Leftrightarrow \exists U_1, U_2 \subset S\ s.t. U_2 := S \backslash U_1 \wedge \sum_{x \in U_1}x = \sum_{x \in U_2} x= t \Leftrightarrow S \text{ ist eine Partition } \Leftrightarrow A(x) = Kodierung(S) \in \text{PARTITION} \) \\
+4. b) i. $T - 2\cdot t \in S$ \\
+\(x \in \text{SUBSET-SUM} \Leftrightarrow \exists U \subset S\ s.t. \sum_{x \in U} = t \wedge (T - 2 \cdot t) \in S \Leftrightarrow \exists U \subset S\ s.t. \sum_{x \in U} = t \wedge (T - 2 \cdot t) \in U \vee (T - 2 \cdot t) \in S \backslash U) \Leftrightarrow  \exists U \subset S\ s.t. \sum_{x \in U} = t \wedge (\exists U' \subset U s.t. \sum_{x \in U'} x = 3 \cdot t - T \vee \exists U' \subset S \backslash U s.t. \sum_{x \in U'} x = t \Leftrightarrow NOIDEA \vee S \backslash \{T - 2 \cdot t\} = U  \backslash \{T - 2 \cdot t\} \cup U' \text{ ist eine Partition }                 \) \\
+4. b) ii. $T - 2\cdot t \notin S $\\
+\( x \in \text{SUBSET-SUM} \Leftrightarrow \text{$S$ besteht aus zwei disjunkte Teilmengen die jeweils zu $t$ und $T-t$ aufsummieren} \Leftrightarrow \text{ wenn man die Teilmenge mit Summe $t$ mit } \{ T - 2 \cdot t\} \text{ vereinigt, hat diese Menge, und die andere Teilmenge von $S$ Summe } T - t \Leftrightarrow S \cup \{ T - 2 \cdot t\} \text{ ist eine Partition} \Leftrightarrow A(x) = Kodierung(S \cup \{ T - 2 \cdot t\}) \in \text{ PARTITION } \) \\
+4. c) i. $2 \cdot t - T \in S$ \\
+\( x \in \text{SUBSET-SUM} \Leftrightarrow \text{$S$ besteht aus zwei disjunkten Teilmengen, die jeweils zu $t (U_1)$  und $T-t (S \backslash U_1)$ aufsummieren und $2 \cdot t -T$ ist in einer der beiden Teilmengen} \Leftrightarrow \text{$S$ besteht aus zwei disjunkten Teilmengen, die jeweils zu $t\ (U_1)$  und $T-t (S \backslash U_1)$ aufsummieren und entweder gilt, dass $U_1 \backslash \{2 cdot t - T \}$ zu $T-t$ aufsummiert oder dass ?} \Leftrightarrow S \backslash \{2 \cdot t - T\} \text{ist eine Partition oder ?} \) \\
+4. c) ii.  $2 \cdot t - T \notin S$ \\
+\( x \in \text{SUBSET-SUM} \Leftrightarrow \text{$S$ besteht aus zwei disjunkten Teilmengen, die jeweils zu $t$ und $T-t$ aufsummieren} \Leftrightarrow \text{Wenn man $2t-T$ zu der Teilmenge mit Summe $T-t$ hinzufügt, bleiben beide Mengen disjunkt und summieren jeweils zu $t$} \Leftrightarrow S \cup \{2 \cdot t -T \} \text{ ist eine Partition } \Leftrightarrow A(x) = Kodierung(S \cup \{2 \cdot t -T \}) \in \text{PARTITION} \) \\
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
